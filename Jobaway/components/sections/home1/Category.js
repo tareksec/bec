@@ -24,8 +24,7 @@ export default function Category(){
                                 <p>Career growth, training and development programs, <br />and meaningful professional connections across Bangladesh.</p>
                                 <Link href="/service" className="theme-btn btn-one">Explore Services</Link>
                                 <figure className="image-box image-hov-one">
-                                    {/* Photo by Austin Distel on Unsplash */}
-                                    <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=800&q=80" alt="Professional career growth and training" width={800} height={600} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                    <Image src="/assets/images/resource/open-web.jpg" alt="Open Web Representation" width={800} height={600} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                 </figure>
                             </div>
                         </div>

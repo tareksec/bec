@@ -26,6 +26,11 @@
   padding: 0px 15px;
 }
 
+.main-header .logo-box img {
+  max-height: 45px;
+  width: auto;
+}
+
 .header-style-one .header-lower .outer-box:before{
   position: absolute;
   content: '';
@@ -72,7 +77,8 @@
 }
 
 .main-header .menu-right-content .theme-btn{
-  padding: 10px 25px;
+  padding: 8px 20px;
+  font-size: 15px;
 }
 
 
@@ -115,10 +121,10 @@
   position:relative;
   display:block;
   text-align:center;
-  font-size:18px;
+  font-size:15px;
   line-height:26px;
-  padding-top: 31px;
-  padding-bottom: 31px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-weight:500;
   font-family: var(--title-font);
   opacity:1;
@@ -144,7 +150,7 @@
   position: absolute;
   content: "\f107";
   font-family: 'Font Awesome 6 Free';
-  top: 31px;
+  top: 20px;
   right: 0px;
   font-weight: 900;
   font-size: 14px;
