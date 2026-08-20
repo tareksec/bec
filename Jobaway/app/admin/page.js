@@ -129,6 +129,36 @@ function ConfirmDialog({ message, onConfirm, onCancel }) {
    Generic form modal
    ────────────────────────────────────────────── */
 function FormModal({ title, fields, data, onChange, onSave, onCancel, saving }) {
+  const [uploadingState, setUploadingState] = useState({})
+
+  const handleUpload = async (e, key) => {
+    const file = e.target.files[0]
+    if (!file) return
+    
+    setUploadingState(prev => ({ ...prev, [key]: true }))
+    
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`
+    const filePath = `${fileName}`
+
+    const { error: uploadError } = await supabase.storage
+      .from('images')
+      .upload(filePath, file)
+
+    if (uploadError) {
+      alert(`Upload failed: ${uploadError.message}`)
+      setUploadingState(prev => ({ ...prev, [key]: false }))
+      return
+    }
+
+    const { data: urlData } = supabase.storage
+      .from('images')
+      .getPublicUrl(filePath)
+    
+    onChange(key, urlData.publicUrl)
+    setUploadingState(prev => ({ ...prev, [key]: false }))
+  }
+
   return (
     <div style={S.overlay} onClick={onCancel}>
       <div style={S.modal} onClick={e => e.stopPropagation()}>
@@ -142,6 +172,28 @@ function FormModal({ title, fields, data, onChange, onSave, onCancel, saving }) 
                 value={data[f.key] || ''}
                 onChange={e => onChange(f.key, e.target.value)}
               />
+            ) : f.type === 'image' ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  onChange={(e) => handleUpload(e, f.key)} 
+                  style={{ color: '#cbd5e1', fontSize: 13 }}
+                  disabled={uploadingState[f.key]}
+                />
+                <input
+                  style={{ ...S.input, marginBottom: 0 }}
+                  type="text"
+                  placeholder="Or paste URL here..."
+                  value={data[f.key] || ''}
+                  onChange={e => onChange(f.key, e.target.value)}
+                  disabled={uploadingState[f.key]}
+                />
+                {uploadingState[f.key] && <span style={{ fontSize: 12, color: '#a78bfa' }}>Uploading...</span>}
+                {data[f.key] && !uploadingState[f.key] && (
+                  <img src={data[f.key]} alt="Preview" style={{ height: 60, objectFit: 'cover', borderRadius: 4, alignSelf: 'flex-start', marginTop: 8 }} />
+                )}
+              </div>
             ) : (
               <input
                 style={S.input}
@@ -180,7 +232,7 @@ function PostsTab() {
     { key: 'slug', label: 'Slug' },
     { key: 'excerpt', label: 'Excerpt', type: 'textarea' },
     { key: 'content', label: 'Content', type: 'textarea' },
-    { key: 'image_url', label: 'Image URL' },
+    { key: 'image_url', label: 'Image URL', type: 'image' },
     { key: 'author', label: 'Author' },
   ]
 
@@ -321,7 +373,7 @@ function EventsTab() {
     { key: 'description', label: 'Description', type: 'textarea' },
     { key: 'location', label: 'Location' },
     { key: 'event_date', label: 'Event Date', type: 'date' },
-    { key: 'image_url', label: 'Image URL' },
+    { key: 'image_url', label: 'Image URL', type: 'image' },
   ]
 
   const load = useCallback(async () => {
@@ -400,7 +452,7 @@ function MembersTab() {
     { key: 'name', label: 'Full Name' },
     { key: 'designation', label: 'Designation / Role' },
     { key: 'bio', label: 'Short Bio', type: 'textarea' },
-    { key: 'image_url', label: 'Photo URL' },
+    { key: 'image_url', label: 'Photo URL', type: 'image' },
     { key: 'linkedin', label: 'LinkedIn URL' },
     { key: 'email', label: 'Email' },
   ]
