@@ -14,7 +14,7 @@ const S = {
     minHeight: '100vh',
     background: '#0f172a',
     color: '#e2e8f0',
-    fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
+    fontFamily: "var(--arimo), var(--noto-bengali), sans-serif",
   },
   /* ── Login ── */
   loginWrap: {

@@ -114,8 +114,8 @@
   --secondary-color: #26472B;
   --text-color: #666666;
   --title-color: #111111;
-  --text-font: "Inter", sans-serif;
-  --title-font: "Outfit", sans-serif;
+  --text-font: var(--arimo), var(--noto-bengali), sans-serif;
+  --title-font: var(--arimo), var(--noto-bengali), sans-serif;
 }
 
 

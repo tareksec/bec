@@ -8,7 +8,7 @@ import "@/public/assets/css/responsive.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
-import { outfit, inter } from "@/lib/font";
+import { arimo, noto_bengali } from "@/lib/font";
 
 export const metadata = {
     title: {
@@ -83,7 +83,7 @@ export default function RootLayout({ children }) {
     };
 
     return (
-        <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+        <html lang="en" className={`${arimo.variable} ${noto_bengali.variable}`}>
             <body>
                 <script
                   type="application/ld+json"
