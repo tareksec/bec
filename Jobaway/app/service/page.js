@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Link from "next/link"
+import Image from "next/image"
 import Layout from "@/components/layout/Layout"
 import Subscribe from '@/components/sections/home2/Subscribe'
 
@@ -22,8 +23,8 @@ export default function Service_Page() {
                             <div className="service-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                 <div className="inner-box">
                                     <div className="image-box">
-                                        <figure className="image"><Link href="/service-details"><img src="assets/images/service/service-1.jpg" alt=""/></Link></figure>
-                                        <figure className="overlay-image"><Link href="/service-details"><img src="assets/images/service/service-1.jpg" alt=""/></Link></figure>
+                                        <figure className="image"><Link href="/service-details"><Image src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Talent Acquisition" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
+                                        <figure className="overlay-image"><Link href="/service-details"><Image src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Talent Acquisition" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
                                     </div>
                                     <div className="lower-content">
                                         <h3><Link href="/service-details">Talent Acquisition &amp; HR</Link></h3>
@@ -37,8 +38,8 @@ export default function Service_Page() {
                             <div className="service-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
                                 <div className="inner-box">
                                     <div className="image-box">
-                                        <figure className="image"><Link href="/service-details-2"><img src="assets/images/service/service-2.jpg" alt=""/></Link></figure>
-                                        <figure className="overlay-image"><Link href="/service-details-2"><img src="assets/images/service/service-2.jpg" alt=""/></Link></figure>
+                                        <figure className="image"><Link href="/service-details-2"><Image src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" alt="Training and Workshops" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
+                                        <figure className="overlay-image"><Link href="/service-details-2"><Image src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" alt="Training and Workshops" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
                                     </div>
                                     <div className="lower-content">
                                         <h3><Link href="/service-details-2">Training &amp; Workshops</Link></h3>
@@ -52,8 +53,8 @@ export default function Service_Page() {
                             <div className="service-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                                 <div className="inner-box">
                                     <div className="image-box">
-                                        <figure className="image"><Link href="/service-details-3"><img src="assets/images/service/service-3.jpg" alt=""/></Link></figure>
-                                        <figure className="overlay-image"><Link href="/service-details-3"><img src="assets/images/service/service-3.jpg" alt=""/></Link></figure>
+                                        <figure className="image"><Link href="/service-details-3"><Image src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Business Consulting" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
+                                        <figure className="overlay-image"><Link href="/service-details-3"><Image src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Business Consulting" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
                                     </div>
                                     <div className="lower-content">
                                         <h3><Link href="/service-details-3">Business Consulting</Link></h3>
@@ -67,8 +68,8 @@ export default function Service_Page() {
                             <div className="service-block-one wow fadeInUp animated" data-wow-delay="900ms" data-wow-duration="1500ms">
                                 <div className="inner-box">
                                     <div className="image-box">
-                                        <figure className="image"><Link href="/service-details-4"><img src="assets/images/service/service-4.jpg" alt=""/></Link></figure>
-                                        <figure className="overlay-image"><Link href="/service-details-4"><img src="assets/images/service/service-4.jpg" alt=""/></Link></figure>
+                                        <figure className="image"><Link href="/service-details-4"><Image src="https://images.unsplash.com/photo-1515169067868-5387ec356754?w=600&q=80" alt="Networking Platforms" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
+                                        <figure className="overlay-image"><Link href="/service-details-4"><Image src="https://images.unsplash.com/photo-1515169067868-5387ec356754?w=600&q=80" alt="Networking Platforms" width={300} height={200} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></Link></figure>
                                     </div>
                                     <div className="lower-content">
                                         <h3><Link href="/service-details-4">Networking Platforms</Link></h3>

@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Link from "next/link"
+import Image from "next/image"
 import Layout from "@/components/layout/Layout"
 import Subscribe from '@/components/sections/home2/Subscribe'
 import { useState } from "react"
@@ -86,7 +87,7 @@ export default function Faq_Page() {
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-12 col-sm-12 image-column">
-                                <figure className="image-box ml_70"><img src="assets/images/resource/faq-1.jpg" alt=""/></figure>
+                                <figure className="image-box ml_70"><Image src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="FAQ" width={500} height={600} style={{ width: '100%', height: 'auto', objectFit: 'cover' }}/></figure>
                             </div>
                         </div>
                     </div>

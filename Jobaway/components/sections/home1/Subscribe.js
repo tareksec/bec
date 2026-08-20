@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 
 
 export default function Subscribe(){
@@ -15,7 +16,9 @@ export default function Subscribe(){
         <> 
 
         <section className="subscribe-section pt_100 pb_100 centred">
-            <div className="bg-layer parallax-bg" data-parallax='{"y": 100}' style={{ backgroundImage: "url(assets/images/background/subscribe-bg.jpg)" }}></div>
+            <div className="bg-layer parallax-bg" data-parallax='{"y": 100}'>
+                <Image src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80" alt="Subscribe Background" fill style={{ objectFit: 'cover', zIndex: -1 }} />
+            </div>
             <div className="auto-container">
                 <div className="content-box">
                     <h2>Subscribe to Our Newsletter</h2>
