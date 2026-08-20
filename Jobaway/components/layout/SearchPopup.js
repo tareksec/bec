@@ -13,10 +13,10 @@ export default function SearchPopup({ isPopup, handlePopup }) {
                     <div className="overlay-layer"></div>
                     <div className="auto-container">
                         <div className="search-form">
-                            <form method="post" action="index.html">
+                            <form method="get" action="/blog">
                                 <div className="form-group">
                                     <fieldset>
-                                        <input type="search" className="form-control" name="search-input" placeholder="Search Here" required />
+                                        <input type="search" className="form-control" name="q" placeholder="Search Here" required />
                                         <button type="submit"><i className="icon-1"></i></button>
                                     </fieldset>
                                 </div>
