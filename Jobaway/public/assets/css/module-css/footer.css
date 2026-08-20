@@ -1,4 +1,3 @@
-
 /** main-footer **/
 
 .main-footer{
@@ -264,6 +263,89 @@
 
   .rtl .main-footer .logo-widget .download-btn a{
     margin-left: 0px;
+  }
+}
+
+/** bec-newsletter **/
+
+.bec-newsletter-form .bec-newsletter-inner{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.bec-newsletter-form .bec-newsletter-inner input[type='email']{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 55px;
+  background: #fff;
+  border: 1px solid #E7E7E7;
+  border-radius: 55px;
+  padding: 10px 125px 10px 24px;
+  font-size: 15px;
+  color: var(--title-color);
+  transition: all 500ms ease;
+}
+
+.bec-newsletter-form .bec-newsletter-inner input[type='email']:focus{
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.bec-newsletter-form .bec-newsletter-inner .theme-btn.btn-one{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 12px 20px;
+  line-height: 22px;
+}
+
+.bec-newsletter-success{
+  position: relative;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: rgba(34, 82, 42, 0.08);
+  border: 1px solid rgba(34, 82, 42, 0.25);
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--secondary-color);
+}
+
+/** bec-footer-bottom **/
+
+.bec-microcopy{
+  font-size: 14px;
+  color: #8A8A8A;
+}
+
+.bec-legal-links{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bec-legal-links a{
+  display: inline-block;
+  color: var(--title-color);
+  font-size: 15px;
+}
+
+.bec-legal-links a:hover{
+  text-decoration: underline;
+}
+
+.bec-sep{
+  display: inline-block;
+  margin: 0px 8px;
+  color: #8A8A8A;
+}
+
+@media only screen and (max-width: 767px){
+  .bec-legal-links{
+    justify-content: center;
   }
 }
 

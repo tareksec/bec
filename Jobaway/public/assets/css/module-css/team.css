@@ -1,4 +1,3 @@
-
 /** team-section **/
 
 .team-section{
@@ -113,6 +112,24 @@
   margin-bottom: 40px;
 }
 
+/** bec-team-avatar **/
+
+.team-block-one .inner-box .image-box .bec-avatar{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #22522A 0%, #3E7A49 100%);
+  color: #fff;
+  font-size: 44px;
+  font-family: var(--title-font);
+  font-weight: 600;
+  letter-spacing: 2px;
+  border-radius: 50%;
+  text-transform: uppercase;
+}
 
 /** rtl-css **/
 

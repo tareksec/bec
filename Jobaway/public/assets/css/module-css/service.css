@@ -178,3 +178,11 @@
 
 
 
+
+/** bec-services **/
+
+.service-section .bec-services-intro{
+  font-size: 18px;
+  line-height: 30px;
+  margin-top: 15px;
+}

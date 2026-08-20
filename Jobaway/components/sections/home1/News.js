@@ -20,8 +20,8 @@ export default function News(){
                                 <div className="bg-layer" style={{ backgroundImage: "url(assets/images/news/news-1.jpg)" }}></div>
                                 <div className="overlay-bg-layer" style={{ backgroundImage: "url(assets/images/news/news-1.jpg)" }}></div>
                                 <div className="content-box">
-                                    <span className="post-date">March 20, 2023</span>
-                                    <h4><Link href="/blog-details">Create a series of blog posts discussing common interview</Link></h4>
+                                    <span className="post-date">News & Insights</span>
+                                    <h4><Link href="/blog-details">Building a Personal Brand That Opens Doors</Link></h4>
                                 </div>
                             </div>
                         </div>
@@ -32,8 +32,8 @@ export default function News(){
                                 <div className="bg-layer" style={{ backgroundImage: "url(assets/images/news/news-2.jpg)" }}></div>
                                 <div className="overlay-bg-layer" style={{ backgroundImage: "url(assets/images/news/news-2.jpg)" }}></div>
                                 <div className="content-box">
-                                    <span className="post-date">March 19, 2023</span>
-                                    <h4><Link href="/blog-details">Explore the concept of personal branding and its impact on</Link></h4>
+                                    <span className="post-date">News & Insights</span>
+                                    <h4><Link href="/blog-details">Five Hiring Mistakes Growing Companies Make</Link></h4>
                                 </div>
                             </div>
                         </div>
@@ -44,8 +44,8 @@ export default function News(){
                                 <div className="bg-layer" style={{ backgroundImage: "url(assets/images/news/news-3.jpg)" }}></div>
                                 <div className="overlay-bg-layer" style={{ backgroundImage: "url(assets/images/news/news-3.jpg)" }}></div>
                                 <div className="content-box">
-                                    <span className="post-date">March 18, 2023</span>
-                                    <h4><Link href="/blog-details">Feature interviews with employees from top companies</Link></h4>
+                                    <span className="post-date">News & Insights</span>
+                                    <h4><Link href="/blog-details">Why Networking Still Wins in a Digital Economy</Link></h4>
                                 </div>
                             </div>
                         </div>

@@ -18,12 +18,11 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <figure className="image"><img src="assets/images/team/team-1.jpg" alt=""/></figure>
-                                    <figure className="overlay-image"><img src="assets/images/team/team-1.jpg" alt=""/></figure>
+                                    <div className="bec-avatar">MRH</div>
                                 </div>
                                 <div className="lower-content">
-                                    <h3><Link href="/">Tom Oliver</Link></h3>
-                                    <span className="designation">Founder</span>
+                                    <h3><Link href="/">Md. Rakibul Hasan</Link></h3>
+                                    <span className="designation">Founder & Chief Executive</span>
                                 </div>
                             </div>
                         </div>
@@ -32,12 +31,11 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <figure className="image"><img src="assets/images/team/team-2.jpg" alt=""/></figure>
-                                    <figure className="overlay-image"><img src="assets/images/team/team-2.jpg" alt=""/></figure>
+                                    <div className="bec-avatar">FI</div>
                                 </div>
                                 <div className="lower-content">
-                                    <h3><Link href="/">Loenard Barnes</Link></h3>
-                                    <span className="designation">Lead Engineer</span>
+                                    <h3><Link href="/">Farhana Islam</Link></h3>
+                                    <span className="designation">Head of Talent Solutions</span>
                                 </div>
                             </div>
                         </div>
@@ -46,12 +44,11 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="400ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <figure className="image"><img src="assets/images/team/team-3.jpg" alt=""/></figure>
-                                    <figure className="overlay-image"><img src="assets/images/team/team-3.jpg" alt=""/></figure>
+                                    <div className="bec-avatar">TA</div>
                                 </div>
                                 <div className="lower-content">
-                                    <h3><Link href="/">Gilbert Sherman</Link></h3>
-                                    <span className="designation">Sale Manager</span>
+                                    <h3><Link href="/">Tanvir Ahmed</Link></h3>
+                                    <span className="designation">Director, Business Consulting</span>
                                 </div>
                             </div>
                         </div>
@@ -60,58 +57,11 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <figure className="image"><img src="assets/images/team/team-4.jpg" alt=""/></figure>
-                                    <figure className="overlay-image"><img src="assets/images/team/team-4.jpg" alt=""/></figure>
+                                    <div className="bec-avatar">NJ</div>
                                 </div>
                                 <div className="lower-content">
-                                    <h3><Link href="/">Franklin Bailey</Link></h3>
-                                    <span className="designation">Art Director</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="lower-box">
-                    <div className="row clearfix">
-                        <div className="col-lg-4 col-md-6 col-sm-12 team-block">
-                            <div className="team-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                <div className="inner-box">
-                                    <div className="image-box">
-                                        <figure className="image"><img src="assets/images/team/team-5.jpg" alt=""/></figure>
-                                        <figure className="overlay-image"><img src="assets/images/team/team-5.jpg" alt=""/></figure>
-                                    </div>
-                                    <div className="lower-content">
-                                        <h3><Link href="/">Antonio Alex</Link></h3>
-                                        <span className="designation">Lead Engineer</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-12 team-block">
-                            <div className="team-block-one wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
-                                <div className="inner-box">
-                                    <div className="image-box">
-                                        <figure className="image"><img src="assets/images/team/team-6.jpg" alt=""/></figure>
-                                        <figure className="overlay-image"><img src="assets/images/team/team-6.jpg" alt=""/></figure>
-                                    </div>
-                                    <div className="lower-content">
-                                        <h3><Link href="/">Diarmuid Eoin</Link></h3>
-                                        <span className="designation">Sale Manager</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-sm-12 team-block">
-                            <div className="team-block-one wow fadeInUp animated" data-wow-delay="400ms" data-wow-duration="1500ms">
-                                <div className="inner-box">
-                                    <div className="image-box">
-                                        <figure className="image"><img src="assets/images/team/team-7.jpg" alt=""/></figure>
-                                        <figure className="overlay-image"><img src="assets/images/team/team-7.jpg" alt=""/></figure>
-                                    </div>
-                                    <div className="lower-content">
-                                        <h3><Link href="/">Ashitaka Dai</Link></h3>
-                                        <span className="designation">Art Director</span>
-                                    </div>
+                                    <h3><Link href="/">Nusrat Jahan</Link></h3>
+                                    <span className="designation">Lead, Training & Development</span>
                                 </div>
                             </div>
                         </div>

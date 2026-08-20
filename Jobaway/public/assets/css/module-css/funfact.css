@@ -1,4 +1,3 @@
-
 /** funfact-section **/
 
 .funfact-section{
@@ -28,6 +27,16 @@
   color: var(--title-color);
   font-weight: 600;
   margin-bottom: 8px;
+}
+
+.funfact-block-one .inner-box .bec-static-count{
+  position: relative;
+  display: block;
+  font-size: 38px;
+  line-height: 50px;
+  font-family: var(--title-font);
+  color: var(--title-color);
+  font-weight: 600;
 }
 
 .funfact-block-one .inner-box p{

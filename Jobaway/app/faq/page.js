@@ -1,122 +1,92 @@
 'use client'
 import React from 'react'
+import Link from "next/link"
 import Layout from "@/components/layout/Layout"
 import Subscribe from '@/components/sections/home2/Subscribe'
 import { useState } from "react"
 
-
 export default function Faq_Page() {
 
-    const [isActive, setIsActive] = useState({
-        status: false,
-        key: 1,
-    })
-
+    const [isActive, setActive] = useState(1);
     const handleToggle = (key) => {
-        if (isActive.key === key) {
-            setIsActive({
-                status: false,
-            })
-        } else {
-            setIsActive({
-                status: true,
-                key,
-            })
-        }
-    }
+        setActive(isActive === key ? 0 : key);
+    };
 
     return (
         <div className="boxed_wrapper">
-            <Layout headerStyle={3} footerStyle={2} breadcrumbTitle="Frequently Asked Question">
-                <section className="testimonial-page-section pt_110 pb_120">
+            <Layout headerStyle={3} footerStyle={2} breadcrumbTitle="FAQ">
+                <section className="testimonial-page-section p_relative pt_110 pb_120">
                     <div className="auto-container">
                         <div className="row clearfix">
                             <div className="col-lg-6 col-md-12 col-sm-12 content-column">
                                 <div className="content_block_three">
-                                    <div className="content-box">
-                                        <div className="sec-title pb_30 sec-title-animation animation-style2">
-                                            <span className="sub-title mb_10 title-animation">General Faqs</span>
+                                    <div className="block-content">
+                                        <div className="sec-title mb_50 sec-title-animation animation-style2">
+                                            <span className="sub-title mb_10 title-animation">FAQ</span>
                                             <h2 className="title-animation">Frequently Asked Questions</h2>
                                         </div>
-                                        <ul className="accordion-box">
-                                            <li className="accordion block active-block">
-                                                <div className={isActive.key == 1 ? "acc-btn active" : "acc-btn"} onClick={() => handleToggle(1)}>
-                                                    <div className="icon-box"><i className="icon-21"></i></div>
-                                                    <h4>How Can I Prepare for an Interview?</h4>
+                                        <div className="accordion-box">
+                                            <div className="accordion-block active-block">
+                                                <div className="accordion-btn" onClick={() => handleToggle(1)}>
+                                                    <h4>What is Bangladesh Executive Chamber (BEC)?</h4>
+                                                    <span className={isActive === 1 ? "icon-box active" : "icon-box"}><i className="icon-21"></i></span>
                                                 </div>
-                                                <div className={isActive.key == 1 ? "acc-content current" : "acc-content"}>
-                                                    <div className="content">
-                                                        <p>To prepare for an interview, research the company, understand the job role and responsibilities, and prepare questions to ask the interviewer.</p>
+                                                {isActive === 1 && (
+                                                    <div className="accordion-content">
+                                                        <p>BEC is a professional ecosystem in Bangladesh focused on career development, business consulting, talent acquisition, and professional networking. We bridge the gap between talented professionals and leading organizations nationwide.</p>
                                                     </div>
+                                                )}
+                                            </div>
+                                            <div className="accordion-block">
+                                                <div className="accordion-btn" onClick={() => handleToggle(2)}>
+                                                    <h4>Who can join BEC?</h4>
+                                                    <span className={isActive === 2 ? "icon-box active" : "icon-box"}><i className="icon-21"></i></span>
                                                 </div>
-                                            </li>
-                                            <li className="accordion block">
-                                                <div className={isActive.key == 2 ? "acc-btn active" : "acc-btn"} onClick={() => handleToggle(2)}>
-                                                    <div className="icon-box"><i className="icon-21"></i></div>
-                                                    <h4>Hiring Managers and Candidates?</h4>
-                                                </div>
-                                                <div className={isActive.key == 2 ? "acc-content current" : "acc-content"}>
-                                                    <div className="content">
-                                                        <p>To prepare for an interview, research the company, understand the job role and responsibilities, and prepare questions to ask the interviewer.</p>
+                                                {isActive === 2 && (
+                                                    <div className="accordion-content">
+                                                        <p>BEC welcomes fresh graduates, mid-career professionals, entrepreneurs, and corporate organizations. Whether you are seeking career growth or business consulting, BEC has a membership tier suited for you.</p>
                                                     </div>
+                                                )}
+                                            </div>
+                                            <div className="accordion-block">
+                                                <div className="accordion-btn" onClick={() => handleToggle(3)}>
+                                                    <h4>What services does BEC provide?</h4>
+                                                    <span className={isActive === 3 ? "icon-box active" : "icon-box"}><i className="icon-21"></i></span>
                                                 </div>
-                                            </li>
-                                            <li className="accordion block">
-                                                <div className={isActive.key == 3 ? "acc-btn active" : "acc-btn"} onClick={() => handleToggle(3)}>
-                                                    <div className="icon-box"><i className="icon-21"></i></div>
-                                                    <h4>Clarifying Recruitment Concepts?</h4>
-                                                </div>
-                                                <div className={isActive.key == 3 ? "acc-content current" : "acc-content"}>
-                                                    <div className="content">
-                                                        <p>To prepare for an interview, research the company, understand the job role and responsibilities, and prepare questions to ask the interviewer.</p>
+                                                {isActive === 3 && (
+                                                    <div className="accordion-content">
+                                                        <p>BEC offers four core services: Talent Acquisition &amp; HR (connecting professionals with top companies), Business Consulting (strategy and growth guidance), Training &amp; Workshops (skill development programs), and Networking Platforms (professional visibility).</p>
                                                     </div>
+                                                )}
+                                            </div>
+                                            <div className="accordion-block">
+                                                <div className="accordion-btn" onClick={() => handleToggle(4)}>
+                                                    <h4>How do I register for BEC training events?</h4>
+                                                    <span className={isActive === 4 ? "icon-box active" : "icon-box"}><i className="icon-21"></i></span>
                                                 </div>
-                                            </li>
-                                            <li className="accordion block">
-                                                <div className={isActive.key == 4 ? "acc-btn active" : "acc-btn"} onClick={() => handleToggle(4)}>
-                                                    <div className="icon-box"><i className="icon-21"></i></div>
-                                                    <h4>Employers look for in candidates?</h4>
-                                                </div>
-                                                <div className={isActive.key == 4 ? "acc-content current" : "acc-content"}>
-                                                    <div className="content">
-                                                        <p>To prepare for an interview, research the company, understand the job role and responsibilities, and prepare questions to ask the interviewer.</p>
+                                                {isActive === 4 && (
+                                                    <div className="accordion-content">
+                                                        <p>Visit the Training &amp; Events page on our website. Each upcoming workshop or seminar has a Register button. Fill in your details and complete the secure payment to confirm your seat.</p>
                                                     </div>
+                                                )}
+                                            </div>
+                                            <div className="accordion-block">
+                                                <div className="accordion-btn" onClick={() => handleToggle(5)}>
+                                                    <h4>Is BEC membership available nationwide?</h4>
+                                                    <span className={isActive === 5 ? "icon-box active" : "icon-box"}><i className="icon-21"></i></span>
                                                 </div>
-                                            </li>
-                                        </ul>
+                                                {isActive === 5 && (
+                                                    <div className="accordion-content">
+                                                        <p>Yes. While our headquarters are in Dhaka, BEC operates nationwide. Our consulting services and training programs are accessible across all 64 districts through both in-person and digital platforms.</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-12 col-sm-12 image-column">
-                                <div className="image-box ml_70">
-                                    <figure className="image image-hov-one"><img src="assets/images/resource/faq-1.jpg" alt=""/></figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <section className="download-section alternat-3 pb_120">
-                    <div className="auto-container">
-                        <div className="inner-container">
-                            <div className="pattern-layer" style={{ backgroundImage: "url(assets/images/shape/shape-20.png)" }}></div>
-                            <div className="row align-items-center">
-                                <div className="col-lg-8 col-md-12 col-sm-12 content-column">
-                                    <div className="content-box">
-                                        <h2>The 2024 guide for Optimal Content <span>Management</span></h2>
-                                        <ul className="list-item mb_30">
-                                            <li>Start by explaining the fundamental concepts of talent acquisition.</li>
-                                            <li> Provide guidance on crafting clear and compelling job descriptions that accurately reflect.</li>
-                                            <li>Practical tips for conducting effective interviews, including types of interview questions interview formats.</li>
-                                        </ul>
-                                        <button type="button" className="theme-btn btn-one">Download E-book</button>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-12 col-sm-12 image-column">
-                                    <div className="image-box">
-                                        <figure className="image"><img src="assets/images/resource/book-2.png" alt=""/></figure>
-                                    </div>
-                                </div>
+                                <figure className="image-box ml_70"><img src="assets/images/resource/faq-1.jpg" alt=""/></figure>
                             </div>
                         </div>
                     </div>

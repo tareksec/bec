@@ -22,11 +22,11 @@
       "static/css/app/page.css",
       "static/chunks/app/page.js"
     ],
-    "/index-5/page": [
+    "/blog-details/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/index-5/page.css",
-      "static/chunks/app/index-5/page.js"
+      "static/css/app/blog-details/page.css",
+      "static/chunks/app/blog-details/page.js"
     ]
   }
 }

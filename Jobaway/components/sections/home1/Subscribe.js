@@ -1,8 +1,15 @@
 'use client'
+import { useState } from "react"
 import Link from "next/link"
 
 
 export default function Subscribe(){
+
+    const [subscribed, setSubscribed] = useState(false)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setSubscribed(true)
+    }
 
     return (
         <> 
@@ -11,17 +18,22 @@ export default function Subscribe(){
             <div className="bg-layer parallax-bg" data-parallax='{"y": 100}' style={{ backgroundImage: "url(assets/images/background/subscribe-bg.jpg)" }}></div>
             <div className="auto-container">
                 <div className="content-box">
-                    <h2>Subscribe Newsletter</h2>
-                    <div className="form-inner">
-                        <form method="post" action="contact.html">
-                            <div className="form-group">
-                                <div className="icon-box"><i className="far fa-envelope"></i></div>
-                                <input type="email" name="email" placeholder="Email Address" required/>
-                                <button type="submit" className="theme-btn btn-one">Subscribe</button>
-                            </div>
-                        </form>
-                    </div>
-                    <p>You can unsubscribe at any time.</p>
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p className="bec-subscribe-prompt">Subscribe for the latest insights, exclusive events, and elite career opportunities.</p>
+                    {!subscribed ? (
+                        <div className="form-inner">
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group">
+                                    <div className="icon-box"><i className="far fa-envelope"></i></div>
+                                    <input type="email" name="email" placeholder="Email Address" required/>
+                                    <button type="submit" className="theme-btn btn-one">Subscribe</button>
+                                </div>
+                            </form>
+                        </div>
+                    ) : (
+                        <div className="bec-subscribe-success">Thank you for subscribing!</div>
+                    )}
+                    <p className="bec-subscribe-note">You can unsubscribe at any time.</p>
                 </div>
             </div>
         </section>

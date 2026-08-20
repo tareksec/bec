@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@next/font": "^14.2.15",
+    "@supabase/supabase-js": "^2.112.3",
     "aos": "^2.3.4",
     "bootstrap-touchspin": "^4.7.3",
     "framer-motion": "^12.4.11",
@@ -29,7 +30,7 @@
     "react-parallax": "^3.5.1",
     "react-typed": "^2.0.12",
     "sass": "^1.66.1",
-    "swiper": "^10.2.0",
+    "swiper": "^14.1.0",
     "typewriter-effect": "^2.21.0",
     "wowjs": "^1.1.3"
   }

@@ -33,8 +33,7 @@ export default function Header1({ scroll, handleMobileMenu, handlePopup }) {
                         </div>
                         <div className="menu-right-content">
                             <div className="search-btn mr_20"><button className="search-toggler" onClick={handlePopup}><i className="icon-1"></i></button></div>
-                            <div className="link-box mr_20"><Link href="/login">Log In</Link></div>
-                            <div className="btn-box"><Link href="/" className="theme-btn btn-one">Get Started</Link></div>
+                            <div className="btn-box"><Link href="/" className="theme-btn btn-one">Join BEC</Link></div>
                         </div>
                     </div>
                 </div>
@@ -54,8 +53,7 @@ export default function Header1({ scroll, handleMobileMenu, handlePopup }) {
                         </div>
                         <div className="menu-right-content">
                             <div className="search-btn mr_20"><button className="search-toggler" onClick={handlePopup}><i className="icon-1"></i></button></div>
-                            <div className="link-box mr_20"><Link href="/login">Log In</Link></div>
-                            <div className="btn-box"><Link href="/" className="theme-btn btn-one">Get Started</Link></div>
+                            <div className="btn-box"><Link href="/" className="theme-btn btn-one">Join BEC</Link></div>
                         </div>
                     </div>
                 </div>

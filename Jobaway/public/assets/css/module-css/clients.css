@@ -1,4 +1,3 @@
-
 /** clients-section **/
 
 .clients-section{
@@ -95,6 +94,32 @@
   font-size: 30px;
   line-height: 40px;
   font-weight: 500;
+}
+
+
+/** bec-clients-text **/
+
+.clients-section .bec-clients-text{
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.clients-section .bec-clients-text h3{
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 500;
+  color: var(--title-color);
+  margin-bottom: 12px;
+}
+
+.clients-section .bec-clients-text p{
+  font-size: 17px;
+  line-height: 28px;
+  color: var(--text-color);
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 

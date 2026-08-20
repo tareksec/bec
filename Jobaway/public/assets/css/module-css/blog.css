@@ -1,0 +1,50 @@
+﻿
+/** bec-blog **/
+
+.blog-grid-content .bec-blog-intro{
+  font-size: 18px;
+  line-height: 30px;
+  margin-top: 15px;
+}
+
+.news-block-two .inner-box .lower-content .bec-post-excerpt{
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 15px;
+}
+
+.bec-blog-empty{
+  position: relative;
+  display: block;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 80px 30px;
+}
+
+.bec-blog-empty .icon-box{
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  font-size: 36px;
+  color: #fff;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  margin-bottom: 25px;
+}
+
+.bec-blog-empty h3{
+  font-size: 30px;
+  line-height: 40px;
+  margin-bottom: 12px;
+}
+
+.bec-blog-empty p{
+  font-size: 18px;
+  line-height: 30px;
+  margin-bottom: 25px;
+}

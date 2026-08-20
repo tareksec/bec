@@ -602,3 +602,52 @@
 
 
 
+
+/** bec-about **/
+
+.content_block_five .content-box .bec-mission-vision{
+  position: relative;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.content_block_five .content-box .bec-mission-vision .bec-mv-item{
+  position: relative;
+  display: block;
+  padding-left: 24px;
+  border-left: 3px solid var(--secondary-color);
+  margin-bottom: 22px;
+}
+
+.content_block_five .content-box .bec-mission-vision .bec-mv-item h4{
+  position: relative;
+  display: block;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 6px;
+}
+
+.content_block_five .content-box .bec-mission-vision .bec-mv-item p{
+  font-size: 16px;
+  line-height: 26px;
+  margin: 0;
+}
+
+.bec-milestone-vision{
+  font-size: 18px;
+  line-height: 30px;
+  margin-top: 15px;
+}
+
+.bec-leadership-intro{
+  font-size: 18px;
+  line-height: 30px;
+  margin-top: 15px;
+}
+
+.team-block-one .inner-box .lower-content .bec-bio{
+  font-size: 15px;
+  line-height: 24px;
+  margin-top: 10px;
+  padding: 0 10px;
+}

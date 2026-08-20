@@ -1,4 +1,3 @@
-
 /** subscribe-section **/
 
 .subscribe-section{
@@ -74,6 +73,37 @@
 .subscribe-section .content-box p{
   line-height: 30px;
   color: #fff;
+}
+
+/** bec-subscribe **/
+
+.subscribe-section .content-box .bec-subscribe-prompt{
+  font-size: 18px;
+  line-height: 30px;
+  color: #fff;
+  max-width: 560px;
+  margin: 0 auto 30px;
+}
+
+.subscribe-section .content-box .bec-subscribe-success{
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 640px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  padding: 22px 30px;
+  font-size: 20px;
+  line-height: 30px;
+  color: #fff;
+  margin-bottom: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.subscribe-section .content-box .bec-subscribe-note{
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.80);
 }
 
 

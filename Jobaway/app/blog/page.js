@@ -3,13 +3,51 @@ import React from 'react'
 import Link from "next/link"
 import Layout from "@/components/layout/Layout"
 import Subscribe from '@/components/sections/home2/Subscribe'
+import { useState } from "react"
 
+const blogPosts = [
+    {
+        id: 1,
+        title: "Building a Personal Brand That Opens Doors",
+        category: "Career Tips",
+        excerpt: "Why your professional reputation is your most valuable career asset — and how to build it deliberately.",
+        image: "assets/images/news/news-4.jpg",
+        date: "March 20, 2023",
+        author: "BEC Editorial Team",
+    },
+    {
+        id: 2,
+        title: "Five Hiring Mistakes Growing Companies Make",
+        category: "Industry Insights",
+        excerpt: "Recruitment errors quietly cost growing organizations far more than they realise.",
+        image: "assets/images/news/news-5.jpg",
+        date: "March 19, 2023",
+        author: "BEC Editorial Team",
+    },
+    {
+        id: 3,
+        title: "Why Networking Still Wins in a Digital Economy",
+        category: "Business",
+        excerpt: "Digital tools amplify relationships — they do not replace them.",
+        image: "assets/images/news/news-7.jpg",
+        date: "March 18, 2023",
+        author: "BEC Editorial Team",
+    },
+]
+
+const blogCategories = ["All", "Career Tips", "Business", "Industry Insights", "Training"]
 
 export default function Blog_Grid() {
 
+    const [activeCategory, setActiveCategory] = useState("All")
+
+    const filteredPosts = activeCategory === "All"
+        ? blogPosts
+        : blogPosts.filter((post) => post.category === activeCategory)
+
     return (
         <div className="boxed_wrapper">
-            <Layout headerStyle={3} footerStyle={2} breadcrumbTitle="Blog Grid">
+            <Layout headerStyle={3} footerStyle={2} breadcrumbTitle="Insights & Resources">
                 
                 <section className="sidebar-page-container p_relative pt_110 pb_120">
                     <div className="auto-container">
@@ -20,7 +58,7 @@ export default function Blog_Grid() {
                                         <div className="search-form">
                                             <form method="post" action="/blog">
                                                 <div className="form-group">
-                                                    <input type="search" name="search-field" placeholder="Search" required/>
+                                                    <input type="search" name="search-field" placeholder="Search insights..." required/>
                                                     <button type="submit"><i className="icon-1"></i></button>
                                                 </div>
                                             </form>
@@ -32,48 +70,22 @@ export default function Blog_Grid() {
                                         </div>
                                         <div className="widget-content">
                                             <ul className="category-list clearfix">
-                                                <li><Link href="/blog-details">Day Trading<span>(09)</span></Link></li>
-                                                <li><Link href="/blog-details">Finance<span>(20)</span></Link></li>
-                                                <li><Link href="/blog-details">Virtual Hiring<span>(25)</span></Link></li>
-                                                <li><Link href="/blog-details">Headhunting<span>(06)</span></Link></li>
-                                                <li><Link href="/blog-details">Promotions<span>(18)</span></Link></li>
-                                                <li><Link href="/blog-details">Recruitment Agencies<span>(11)</span></Link></li>
+                                                {blogCategories.map((category, index) => (
+                                                    <li key={index}><Link href="#" onClick={(e) => { e.preventDefault(); setActiveCategory(category); }}>{category}</Link></li>
+                                                ))}
                                             </ul>
-                                        </div>
-                                    </div>
-                                    <div className="sidebar-widget post-widget mb_60">
-                                        <div className="widget-title mb_20">
-                                            <h3>Latest Posts</h3>
-                                        </div>
-                                        <div className="post-inner">
-                                            <div className="post">
-                                                <figure className="post-thumb"><Link href="/blog-details"><img src="assets/images/news/post-1.jpg" alt=""/></Link></figure>
-                                                <h6><Link href="/blog-details">Provide guidance on crafting effective</Link></h6>
-                                                <span className="post-date">1 May 2024</span>
-                                            </div>
-                                            <div className="post">
-                                                <figure className="post-thumb"><Link href="/blog-details"><img src="assets/images/news/post-2.jpg" alt=""/></Link></figure>
-                                                <h6><Link href="/blog-details">Explore the concept of personal branding</Link></h6>
-                                                <span className="post-date">1 May 2024</span>
-                                            </div>
-                                            <div className="post">
-                                                <figure className="post-thumb"><Link href="/blog-details"><img src="assets/images/news/post-3.jpg" alt=""/></Link></figure>
-                                                <h6><Link href="/blog-details">Use relevant keywords to improve</Link></h6>
-                                                <span className="post-date">1 May 2024</span>
-                                            </div>
                                         </div>
                                     </div>
                                     <div className="sidebar-widget tags-widget mb_45">
                                         <div className="widget-title mb_20">
-                                            <h3>Popular tag</h3>
+                                            <h3>Popular Topics</h3>
                                         </div>
                                         <div className="widget-content">
                                             <ul className="tags-list clearfix">
-                                                <li><Link href="/blog-details">Account</Link></li>
-                                                <li><Link href="/blog-details">Careers</Link></li>
-                                                <li><Link href="/blog-details">Demo</Link></li>
-                                                <li><Link href="/blog-details">Development</Link></li>
-                                                <li><Link href="/blog-details">Technology</Link></li>
+                                                <li><Link href="#" onClick={(e) => { e.preventDefault(); setActiveCategory("Career Tips"); }}>Career Tips</Link></li>
+                                                <li><Link href="#" onClick={(e) => { e.preventDefault(); setActiveCategory("Business"); }}>Business</Link></li>
+                                                <li><Link href="#" onClick={(e) => { e.preventDefault(); setActiveCategory("Industry Insights"); }}>Industry Insights</Link></li>
+                                                <li><Link href="#" onClick={(e) => { e.preventDefault(); setActiveCategory("Training"); }}>Training</Link></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -83,180 +95,52 @@ export default function Blog_Grid() {
                                         </div>
                                         <div className="widget-content">
                                             <ul className="archives-list clearfix">
-                                                <li><Link href="/blog-details"><i className="fal fa-angle-right"></i>December 20, 2022<span>(09)</span></Link></li>
-                                                <li><Link href="/blog-details"><i className="fal fa-angle-right"></i>December 26, 2022<span>(20)</span></Link></li>
-                                                <li><Link href="/blog-details"><i className="fal fa-angle-right"></i>December 26, 2022<span>(25)</span></Link></li>
-                                                <li><Link href="/blog-details"><i className="fal fa-angle-right"></i>December 26, 2022<span>(06)</span></Link></li>
+                                                <li><Link href="/blog"><i className="fal fa-angle-right"></i>March 2023<span>(03)</span></Link></li>
                                             </ul>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="download-widget mr_40">
-                                    <div className="shape" style={{ backgroundImage: "url(assets/images/shape/shape-24.png)" }}></div>
-                                    <div className="inner-box">
-                                        <figure className="image-box"><img src="assets/images/resource/book-3.png" alt=""/></figure>
-                                        <h4>The 2024 guide for Optimal Content <span>Management</span></h4>
-                                        <button type="button" className="theme-btn btn-one">Download E-book</button>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-lg-8 col-md-12 col-sm-12 content-side">
                                 <div className="blog-grid-content">
-                                    <div className="row clearfix">
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-4.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-4.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Business</span>
-                                                        <h3><Link href="/blog-details">Create a series of blog posts discussing common interview</Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">Alex Beniwal</Link></li>
-                                                            <li><span>March 20, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-5.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-5.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Analytics</span>
-                                                        <h3><Link href="/blog-details">Explore the concept of personal branding and its impact on</Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">Stefen De</Link></li>
-                                                            <li><span>March 19, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-7.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-7.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Technology</span>
-                                                        <h3><Link href="/blog-details">Share stories of employees who have advanced within the</Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">Ema malwar</Link></li>
-                                                            <li><span>March 18, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-8.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-8.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Development</span>
-                                                        <h3><Link href="/blog-details">Provide guidance on crafting effective resumes and cover</Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">John Rock</Link></li>
-                                                            <li><span>March 17, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-9.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-9.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Remote</span>
-                                                        <h3><Link href="/blog-details">Detail any internship or graduate programs you offer</Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">Caly Andrs</Link></li>
-                                                            <li><span>March 16, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-10.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-10.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Analytics</span>
-                                                        <h3><Link href="/blog-details">Use relevant keywords to improve the blog’s visibility in</Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">Tom Rose</Link></li>
-                                                            <li><span>March 15, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-11.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-11.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Remote</span>
-                                                        <h3><Link href="/blog-details">Explore the concept of personal branding and its impact on</Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">Jhon Haris</Link></li>
-                                                            <li><span>March 14, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-12 news-block">
-                                            <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                <div className="inner-box">
-                                                    <div className="image-box">
-                                                        <figure className="image"><Link href="/blog-details"><img src="assets/images/news/news-12.jpg" alt=""/></Link></figure>
-                                                        <figure className="overlay-image"><Link href="/blog-details"><img src="assets/images/news/news-12.jpg" alt=""/></Link></figure>
-                                                    </div>
-                                                    <div className="lower-content">
-                                                        <span className="category">Analytics</span>
-                                                        <h3><Link href="/blog-details">Share stories of employees who have advanced within the </Link></h3>
-                                                        <ul className="post-info">
-                                                            <li>By <Link href="/blog-details">Alex Bolt</Link></li>
-                                                            <li><span>March 13, 2023</span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="sec-title pb_40 sec-title-animation animation-style2">
+                                        <span className="sub-title mb_10 title-animation">Insights &amp; Resources</span>
+                                        <h2 className="title-animation">Stay Ahead of the Curve</h2>
+                                        <p className="bec-blog-intro">Stay updated with the latest industry trends, career tips, and business strategies.</p>
                                     </div>
-                                    <div className="pagination-wrapper">
-                                        <ul className="pagination clearfix">
-                                            <li><Link href="/blog"><i className="icon-34"></i></Link></li>
-                                            <li><Link href="/blog" className="current">1</Link></li>
-                                            <li><Link href="/blog">2</Link></li>
-                                            <li><Link href="/blog">3</Link></li>
-                                            <li><Link href="/blog"><i className="icon-35"></i></Link></li>
-                                        </ul>
-                                    </div>
+                                    {filteredPosts.length > 0 ? (
+                                        <div className="row clearfix">
+                                            {filteredPosts.map((post) => (
+                                                <div className="col-lg-6 col-md-6 col-sm-12 news-block" key={post.id}>
+                                                    <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                                        <div className="inner-box">
+                                                            <div className="image-box">
+                                                                <figure className="image"><Link href="/blog-details"><img src={post.image} alt=""/></Link></figure>
+                                                                <figure className="overlay-image"><Link href="/blog-details"><img src={post.image} alt=""/></Link></figure>
+                                                            </div>
+                                                            <div className="lower-content">
+                                                                <span className="category">{post.category}</span>
+                                                                <h3><Link href="/blog-details">{post.title}</Link></h3>
+                                                                <p className="bec-post-excerpt">{post.excerpt}</p>
+                                                                <ul className="post-info">
+                                                                    <li>By <Link href="/blog-details">{post.author}</Link></li>
+                                                                    <li><span>{post.date}</span></li>
+                                                                </ul>
+                                                                <div className="btn-box mt_20"><Link href="/blog-details" className="theme-btn btn-one">Learn More</Link></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="bec-blog-empty">
+                                            <div className="icon-box"><i className="icon-38"></i></div>
+                                            <h3>Coming Soon</h3>
+                                            <p>We are currently curating the best content for this category.</p>
+                                            <Link href="/blog" className="theme-btn btn-one" onClick={(e) => { e.preventDefault(); setActiveCategory("All"); }}>View All Articles</Link>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

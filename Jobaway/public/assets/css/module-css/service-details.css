@@ -320,3 +320,54 @@
 
 
 
+
+/** bec-service-details **/
+
+.service-details-content .bec-feature-list{
+  max-width: 560px;
+}
+
+.service-details-content .bec-feature-list li{
+  position: relative;
+  display: block;
+  font-size: 18px;
+  line-height: 30px;
+  font-family: var(--title-font);
+  font-weight: 500;
+  color: var(--title-color);
+  padding-left: 18px;
+  margin-bottom: 12px;
+}
+
+.service-details-content .bec-feature-list li:last-child{
+  margin-bottom: 0px;
+}
+
+.service-details-content .bec-feature-list li:before{
+  position: absolute;
+  content: '';
+  background: var(--secondary-color);
+  width: 7px;
+  height: 7px;
+  left: 0px;
+  top: 12px;
+  border-radius: 50%;
+}
+
+.service-sidebar .download-widget .bec-cta-icon{
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  margin-bottom: 18px;
+}
+
+.service-sidebar .download-widget .bec-cta-icon i{
+  color: #fff;
+}
