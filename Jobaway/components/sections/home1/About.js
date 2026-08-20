@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link"
+import Image from "next/image"
 import VideoPopup from "@/components/elements/VideoPopup"
 
 
@@ -14,8 +15,14 @@ export default function About(){
                         <div className="video_block_one">
                             <div className="video-box p_relative pt_40 pb_40 pl_30 centred">
                                 <div className="image-layer">
-                                    <figure className="image-1"><img src="assets/images/resource/video-3.jpg" alt=""/></figure>
-                                    <figure className="image-2"><img src="assets/images/resource/video-2.jpg" alt=""/></figure>
+                                    <figure className="image-1">
+                                        {/* Photo by Brooke Cagle on Unsplash */}
+                                        <Image src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="People collaborating in a modern office" width={400} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                    </figure>
+                                    <figure className="image-2">
+                                        {/* Photo by Campaign Creators on Unsplash */}
+                                        <Image src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="Team discussing corporate growth" width={400} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                    </figure>
                                 </div>
                                 <div className="video-inner" style={{ backgroundImage: "url(assets/images/resource/video-1.jpg)" }}>
                                     <div className="video-content">

@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link"
+import Image from "next/image"
 
 
 export default function Category(){
@@ -22,7 +23,10 @@ export default function Category(){
                                 <h2>For Professionals</h2>
                                 <p>Career growth, training and development programs, <br />and meaningful professional connections across Bangladesh.</p>
                                 <Link href="/service" className="theme-btn btn-one">Explore Services</Link>
-                                <figure className="image-box image-hov-one"><img src="assets/images/resource/category-1.jpg" alt=""/></figure>
+                                <figure className="image-box image-hov-one">
+                                    {/* Photo by Austin Distel on Unsplash */}
+                                    <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=800&q=80" alt="Professional career growth and training" width={800} height={600} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                </figure>
                             </div>
                         </div>
                     </div>
@@ -32,7 +36,10 @@ export default function Category(){
                                 <h2>For Organizations</h2>
                                 <p>Talent acquisition, business consulting, and brand <br />strategy built to drive corporate growth.</p>
                                 <Link href="/service" className="theme-btn btn-one">Explore Services</Link>
-                                <figure className="image-box image-hov-two"><img src="assets/images/resource/category-2.jpg" alt=""/></figure>
+                                <figure className="image-box image-hov-two">
+                                    {/* Photo by Israel Andrade on Unsplash */}
+                                    <Image src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Corporate business strategy and consulting" width={800} height={600} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                </figure>
                             </div>
                         </div>
                     </div>

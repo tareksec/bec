@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Link from "next/link"
+import Image from "next/image"
 import Layout from "@/components/layout/Layout"
 import CounterUp from "@/components/elements/CounterUp"
 import Subscribe from '@/components/sections/home2/Subscribe'
@@ -17,12 +18,20 @@ export default function About_Page() {
                                 <div className="image_block_two">
                                     <div className="image-inner">
                                         <div className="image-box mr_15">
-                                            <figure className="image image-1 mb_15"><img src="assets/images/resource/about-3.jpg" alt=""/></figure>
-                                            <figure className="image image-2"><img src="assets/images/resource/about-4.jpg" alt=""/></figure>
+                                            <figure className="image image-1 mb_15">
+                                                <Image src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="Team collaborating" width={300} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                            </figure>
+                                            <figure className="image image-2">
+                                                <Image src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" alt="Business meeting" width={300} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                            </figure>
                                         </div>
                                         <div className="image-box">
-                                            <figure className="image image-3 mb_15"><img src="assets/images/resource/about-5.jpg" alt=""/></figure>
-                                            <figure className="image image-4"><img src="assets/images/resource/about-6.jpg" alt=""/></figure>
+                                            <figure className="image image-3 mb_15">
+                                                <Image src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80" alt="Professionals working" width={300} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                            </figure>
+                                            <figure className="image image-4">
+                                                <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=600&q=80" alt="Professional training" width={300} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                            </figure>
                                         </div>
                                         <div className="support-box">
                                             <div className="icon-box"><i className="icon-28"></i></div>
@@ -184,7 +193,7 @@ export default function About_Page() {
                                 <div className="team-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                     <div className="inner-box">
                                         <div className="image-box">
-                                            <div className="bec-avatar">MRH</div>
+                                            <Image src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Md. Rakibul Hasan" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                         </div>
                                         <div className="lower-content">
                                             <h3><Link href="https://www.linkedin.com/company/bangladesh-executive-chamber/" target="_blank" rel="noreferrer">Md. Rakibul Hasan</Link></h3>
@@ -198,7 +207,7 @@ export default function About_Page() {
                                 <div className="team-block-one wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
                                     <div className="inner-box">
                                         <div className="image-box">
-                                            <div className="bec-avatar">FI</div>
+                                            <Image src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80" alt="Farhana Islam" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                         </div>
                                         <div className="lower-content">
                                             <h3><Link href="https://www.linkedin.com/company/bangladesh-executive-chamber/" target="_blank" rel="noreferrer">Farhana Islam</Link></h3>
@@ -212,7 +221,7 @@ export default function About_Page() {
                                 <div className="team-block-one wow fadeInUp animated" data-wow-delay="400ms" data-wow-duration="1500ms">
                                     <div className="inner-box">
                                         <div className="image-box">
-                                            <div className="bec-avatar">TA</div>
+                                            <Image src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Tanvir Ahmed" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                         </div>
                                         <div className="lower-content">
                                             <h3><Link href="https://www.linkedin.com/company/bangladesh-executive-chamber/" target="_blank" rel="noreferrer">Tanvir Ahmed</Link></h3>
@@ -226,7 +235,7 @@ export default function About_Page() {
                                 <div className="team-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                                     <div className="inner-box">
                                         <div className="image-box">
-                                            <div className="bec-avatar">NJ</div>
+                                            <Image src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Nusrat Jahan" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                         </div>
                                         <div className="lower-content">
                                             <h3><Link href="https://www.linkedin.com/company/bangladesh-executive-chamber/" target="_blank" rel="noreferrer">Nusrat Jahan</Link></h3>

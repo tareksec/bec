@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link"
+import Image from "next/image"
 
 
 export default function Team(){
@@ -18,7 +19,7 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <div className="bec-avatar">MRH</div>
+                                    <Image src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Md. Rakibul Hasan" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                 </div>
                                 <div className="lower-content">
                                     <h3><Link href="/">Md. Rakibul Hasan</Link></h3>
@@ -31,7 +32,7 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <div className="bec-avatar">FI</div>
+                                    <Image src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80" alt="Farhana Islam" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                 </div>
                                 <div className="lower-content">
                                     <h3><Link href="/">Farhana Islam</Link></h3>
@@ -44,7 +45,7 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="400ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <div className="bec-avatar">TA</div>
+                                    <Image src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Tanvir Ahmed" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                 </div>
                                 <div className="lower-content">
                                     <h3><Link href="/">Tanvir Ahmed</Link></h3>
@@ -57,7 +58,7 @@ export default function Team(){
                         <div className="team-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
                             <div className="inner-box">
                                 <div className="image-box">
-                                    <div className="bec-avatar">NJ</div>
+                                    <Image src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Nusrat Jahan" width={300} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                 </div>
                                 <div className="lower-content">
                                     <h3><Link href="/">Nusrat Jahan</Link></h3>

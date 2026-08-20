@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Link from "next/link"
+import Image from "next/image"
 import Layout from "@/components/layout/Layout"
 import Subscribe from '@/components/sections/home2/Subscribe'
 
@@ -44,17 +45,29 @@ export default function Blog_Details() {
                                         </div>
                                         <div className="post-inner">
                                             <div className="post">
-                                                <figure className="post-thumb"><Link href="/blog-details"><img src="assets/images/news/post-1.jpg" alt=""/></Link></figure>
+                                                <figure className="post-thumb">
+                                                    <Link href="/blog-details">
+                                                        <Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=200&q=80" alt="Networking event" width={80} height={80} style={{ objectFit: 'cover' }} />
+                                                    </Link>
+                                                </figure>
                                                 <h6><Link href="/blog-details">Building a Personal Brand That Opens Doors</Link></h6>
                                                 <span className="post-date">March 20, 2023</span>
                                             </div>
                                             <div className="post">
-                                                <figure className="post-thumb"><Link href="/blog-details"><img src="assets/images/news/post-2.jpg" alt=""/></Link></figure>
+                                                <figure className="post-thumb">
+                                                    <Link href="/blog-details">
+                                                        <Image src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80" alt="Job interview" width={80} height={80} style={{ objectFit: 'cover' }} />
+                                                    </Link>
+                                                </figure>
                                                 <h6><Link href="/blog-details">Five Hiring Mistakes Growing Companies Make</Link></h6>
                                                 <span className="post-date">March 19, 2023</span>
                                             </div>
                                             <div className="post">
-                                                <figure className="post-thumb"><Link href="/blog-details"><img src="assets/images/news/post-3.jpg" alt=""/></Link></figure>
+                                                <figure className="post-thumb">
+                                                    <Link href="/blog-details">
+                                                        <Image src="https://images.unsplash.com/photo-1515169067868-5387ec356754?w=200&q=80" alt="Digital economy networking" width={80} height={80} style={{ objectFit: 'cover' }} />
+                                                    </Link>
+                                                </figure>
                                                 <h6><Link href="/blog-details">Why Networking Still Wins in a Digital Economy</Link></h6>
                                                 <span className="post-date">March 18, 2023</span>
                                             </div>
@@ -90,7 +103,9 @@ export default function Blog_Details() {
                                     <div className="news-block-two">
                                         <div className="inner-box">
                                             <div className="image-box">
-                                                <figure className="image"><img src="assets/images/news/news-15.jpg" alt=""/></figure>
+                                                <figure className="image">
+                                                    <Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80" alt="Featured blog post image showing professionals networking" width={1200} height={600} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                                </figure>
                                             </div>
                                             <div className="lower-content">
                                                 <span className="category">Career Tips</span>
@@ -114,10 +129,14 @@ export default function Blog_Details() {
                                     <div className="two-column">
                                         <div className="row clearfix">
                                             <div className="col-lg-6 col-md-6 col-sm-12 image-column">
-                                                <figure className="image-box mb_25"><img src="assets/images/news/news-17.jpg" alt=""/></figure>
+                                                <figure className="image-box mb_25">
+                                                    <Image src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Professionals working on laptops" width={800} height={500} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                                </figure>
                                             </div>
                                             <div className="col-lg-6 col-md-6 col-sm-12 image-column">
-                                                <figure className="image-box mb_25"><img src="assets/images/news/news-18.jpg" alt=""/></figure>
+                                                <figure className="image-box mb_25">
+                                                    <Image src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Team discussing a project" width={800} height={500} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                                </figure>
                                             </div>
                                         </div>
                                     </div>
