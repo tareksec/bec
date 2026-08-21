@@ -98,7 +98,7 @@ function BlogDetailsContent() {
                                             <div className="inner-box">
                                                 <div className="image-box">
                                                     <figure className="image">
-                                                        <img src={post.cover_image || "assets/images/news/news-4.jpg"} alt={post.title} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                                        <img src={post.cover_image || "/assets/images/placeholder.svg"} alt={post.title} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                                     </figure>
                                                 </div>
                                                 <div className="lower-content">

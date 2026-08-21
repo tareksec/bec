@@ -5,6 +5,13 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
 
+const generateSlug = (title) => title
+  .toLowerCase()
+  .trim()
+  .replace(/[^\w\s-]/g, '')
+  .replace(/[\s_-]+/g, '-')
+  .replace(/^-+|-+$/g, '')
+
 const styles = {
   page: { padding: 32, color: '#e2e8f0', fontFamily: 'var(--arimo), var(--noto-bengali), sans-serif' },
   card: { background: '#1e293b', borderRadius: 16, padding: 32, maxWidth: 900, margin: '0 auto', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' },
@@ -28,6 +35,7 @@ export default function EditPostPage() {
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -56,7 +64,46 @@ export default function EditPostPage() {
   }, [postId])
 
   const handleChange = (field, value) => {
-    setPost((prev) => ({ ...prev, [field]: value }))
+    setPost((prev) => {
+      const updated = { ...prev, [field]: value }
+      // Auto-regenerate slug when title changes
+      if (field === 'title') {
+        updated.slug = generateSlug(value)
+      }
+      return updated
+    })
+  }
+
+  // Handle Image Upload
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    setUploadingImage(true)
+    setError('')
+
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('post-images')
+      .upload(`${Date.now()}-${file.name}`, file, {
+        cacheControl: '3600',
+        upsert: false
+      })
+
+    if (uploadError) {
+      setError(`Image upload failed: ${uploadError.message}`)
+      setUploadingImage(false)
+      return
+    }
+
+    if (!uploadData?.path) {
+      setError('Image upload failed: Supabase did not return an uploaded file path.')
+      setUploadingImage(false)
+      return
+    }
+
+    const { data: urlData } = supabase.storage.from('post-images').getPublicUrl(uploadData.path)
+    setPost(prev => ({ ...prev, cover_image: urlData.publicUrl }))
+    setUploadingImage(false)
   }
 
   const handleSave = async () => {
@@ -156,8 +203,13 @@ export default function EditPostPage() {
           </div>
 
           <div>
-            <label style={styles.label}>Cover Image URL</label>
-            <input style={styles.input} value={post.cover_image || ''} onChange={(e) => handleChange('cover_image', e.target.value)} />
+            <label style={styles.label}>Cover Image</label>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} style={{ color: '#cbd5e1', fontSize: 14 }} />
+              {uploadingImage && <span style={{ fontSize: 13, color: '#a78bfa' }}>Uploading to Supabase...</span>}
+              {post.cover_image && <img src={post.cover_image} alt="Cover Preview" style={{ width: '100%', height: 160, objectFit: 'cover', borderRadius: 8 }} />}
+              <input style={styles.input} type="text" placeholder="Or paste image URL directly..." value={post.cover_image || ''} onChange={(e) => handleChange('cover_image', e.target.value)} />
+            </div>
           </div>
 
           <div>
@@ -170,7 +222,7 @@ export default function EditPostPage() {
           </div>
 
           <div>
-            <button style={styles.btnPrimary} onClick={handleSave} disabled={saving}>
+            <button style={styles.btnPrimary} onClick={handleSave} disabled={saving || uploadingImage}>
               {saving ? 'Saving…' : 'Save changes'}
             </button>
           </div>

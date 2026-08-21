@@ -117,8 +117,8 @@ function BlogGridContent() {
                                                 <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                                     <div className="inner-box">
                                                         <div className="image-box">
-                                                            <figure className="image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "assets/images/news/news-4.jpg"} alt={post.title}/></Link></figure>
-                                                            <figure className="overlay-image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "assets/images/news/news-4.jpg"} alt={post.title}/></Link></figure>
+                                                            <figure className="image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "/assets/images/placeholder.svg"} alt={post.title}/></Link></figure>
+                                                            <figure className="overlay-image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "/assets/images/placeholder.svg"} alt={post.title}/></Link></figure>
                                                         </div>
                                                         <div className="lower-content">
                                                             <span className="category">{post.category || "General"}</span>

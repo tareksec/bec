@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#1e293b"/>
+  <text x="400" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#64748b">No Image Available</text>
+  <text x="400" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#475569">Upload a cover image for this post</text>
+</svg>

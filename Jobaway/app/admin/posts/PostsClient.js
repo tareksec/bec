@@ -141,7 +141,7 @@ export default function PostsClient({ posts, totalCount, categories, page, limit
                   <tr key={post.id}>
                     <td style={S.td}>
                       <img 
-                        src={post.cover_image || 'https://via.placeholder.com/80?text=No+Image'} 
+                        src={post.cover_image || '/assets/images/placeholder.svg'} 
                         alt={post.title} 
                         style={{ width: 60, height: 40, objectFit: 'cover', borderRadius: 6 }} 
                       />
@@ -164,11 +164,11 @@ export default function PostsClient({ posts, totalCount, categories, page, limit
                     <td style={S.td}>
                       <span style={S.badge(post.status)}>{post.status}</span>
                     </td>
-                    <td style={S.td} style={{ color: '#94a3b8', fontSize: 13 }}>
+                    <td style={{ ...S.td, color: '#94a3b8', fontSize: 13 }}>
                       {new Date(post.created_at).toLocaleDateString()}
                     </td>
                     <td style={S.td}>
-                      <Link href={`/blog/${post.slug}`} target="_blank" style={S.actionBtn('#475569')}>View</Link>
+                      <Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`} target="_blank" style={S.actionBtn('#475569')}>View</Link>
                       <Link href={`/admin/posts/${post.id}/edit`} style={S.actionBtn('#6366f1')}>Edit</Link>
                       <button style={S.actionBtn('#ef4444')} onClick={() => setDeleteId(post.id)}>Delete</button>
                     </td>
