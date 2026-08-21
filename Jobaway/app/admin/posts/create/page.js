@@ -41,6 +41,13 @@ const S = {
   quillWrapper: { marginBottom: 24, background: '#fff', color: '#000', borderRadius: 8, overflow: 'hidden' }
 }
 
+const generateSlug = (title) => title
+  .toLowerCase()
+  .trim()
+  .replace(/[^\w\s-]/g, '')
+  .replace(/[\s_-]+/g, '-')
+  .replace(/^-+|-+$/g, '')
+
 export default function CreatePostPage() {
   const router = useRouter()
   
@@ -86,14 +93,15 @@ export default function CreatePostPage() {
     loadData()
   }, [])
 
-  // Auto-generate slug from title
+  useEffect(() => {
+    if (formData.title) {
+      setFormData(prev => ({ ...prev, slug: generateSlug(prev.title) }))
+    }
+  }, [formData.title])
+
   const handleTitleChange = (e) => {
     const val = e.target.value
-    setFormData(prev => ({
-      ...prev,
-      title: val,
-      slug: val.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
-    }))
+    setFormData(prev => ({ ...prev, title: val }))
   }
 
   // Handle Hashtag Input (Enter key)
@@ -120,15 +128,21 @@ export default function CreatePostPage() {
     setUploadingImage(true)
     setError('')
     
-    const fileExt = file.name.split('.').pop()
-    const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`
-    
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('post-images')
-      .upload(`${Date.now()}-${file.name}`, file)
+      .upload(`${Date.now()}-${file.name}`, file, {
+        cacheControl: '3600',
+        upsert: false
+      })
     
     if (uploadError) {
       setError(`Image upload failed: ${uploadError.message}`)
+      setUploadingImage(false)
+      return
+    }
+
+    if (!uploadData?.path) {
+      setError('Image upload failed: Supabase did not return an uploaded file path.')
       setUploadingImage(false)
       return
     }

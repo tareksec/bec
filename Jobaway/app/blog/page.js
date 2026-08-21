@@ -117,18 +117,18 @@ function BlogGridContent() {
                                                 <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                                     <div className="inner-box">
                                                         <div className="image-box">
-                                                            <figure className="image"><Link href={`/blog-details?id=${post.id}`}><img src={post.image_url || "assets/images/news/news-4.jpg"} alt=""/></Link></figure>
-                                                            <figure className="overlay-image"><Link href={`/blog-details?id=${post.id}`}><img src={post.image_url || "assets/images/news/news-4.jpg"} alt=""/></Link></figure>
+                                                            <figure className="image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "assets/images/news/news-4.jpg"} alt={post.title}/></Link></figure>
+                                                            <figure className="overlay-image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "assets/images/news/news-4.jpg"} alt={post.title}/></Link></figure>
                                                         </div>
                                                         <div className="lower-content">
                                                             <span className="category">{post.category || "General"}</span>
-                                                            <h3><Link href={`/blog-details?id=${post.id}`}>{post.title}</Link></h3>
+                                                            <h3><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}>{post.title}</Link></h3>
                                                             <p className="bec-post-excerpt">{post.excerpt}</p>
                                                             <ul className="post-info">
-                                                                <li>By <Link href={`/blog-details?id=${post.id}`}>{post.author || "Admin"}</Link></li>
+                                                                <li>By <Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}>{post.author || "Admin"}</Link></li>
                                                                 <li><span>{post.created_at ? new Date(post.created_at).toLocaleDateString() : '—'}</span></li>
                                                             </ul>
-                                                            <div className="btn-box mt_20"><Link href={`/blog-details?id=${post.id}`} className="theme-btn btn-one">Learn More</Link></div>
+                                                            <div className="btn-box mt_20"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`} className="theme-btn btn-one">Learn More</Link></div>
                                                         </div>
                                                     </div>
                                                 </div>

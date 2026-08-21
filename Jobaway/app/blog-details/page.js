@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect, Suspense } from 'react'
 import Link from "next/link"
-import Image from "next/image"
 import { useSearchParams, useRouter } from "next/navigation"
 import Layout from "@/components/layout/Layout"
 import Subscribe from '@/components/sections/home2/Subscribe'
@@ -10,6 +9,7 @@ import { supabase } from '@/lib/supabase/client'
 function BlogDetailsContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
+    const slug = searchParams.get('slug')
     const id = searchParams.get('id')
     
     const [post, setPost] = useState(null)
@@ -18,14 +18,21 @@ function BlogDetailsContent() {
 
     useEffect(() => {
         async function fetchPost() {
-            if (!id) {
+            if (!slug && !id) {
                 setLoading(false)
-                setError("No post ID provided.")
+                setError("No post slug provided.")
                 return
             }
             
             setLoading(true)
-            const { data, error } = await supabase.from('posts').select('*').eq('id', id).single()
+            let query = supabase.from('posts').select('*')
+            query = slug ? query.eq('slug', slug) : query.eq('id', id)
+            let { data, error } = await query.single()
+
+            // Keep old ID links working while all new links use slugs.
+            if (error && slug && id) {
+                ({ data, error } = await supabase.from('posts').select('*').eq('id', id).single())
+            }
             
             if (error) {
                 setError("Could not find this post.")
@@ -35,7 +42,7 @@ function BlogDetailsContent() {
             setLoading(false)
         }
         fetchPost()
-    }, [id])
+    }, [slug, id])
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -91,7 +98,7 @@ function BlogDetailsContent() {
                                             <div className="inner-box">
                                                 <div className="image-box">
                                                     <figure className="image">
-                                                        <Image src={post.image_url || "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80"} alt={post.title} width={1200} height={600} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                                        <img src={post.cover_image || "assets/images/news/news-4.jpg"} alt={post.title} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                                     </figure>
                                                 </div>
                                                 <div className="lower-content">
