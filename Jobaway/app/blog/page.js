@@ -8,6 +8,13 @@ import { supabase } from '@/lib/supabase/client'
 
 const blogCategories = ["All", "Career Tips", "Business", "Industry Insights", "Training"]
 
+const getMediumSlug = (title = '') => title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
 function BlogGridContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -15,6 +22,7 @@ function BlogGridContent() {
     
     const [activeCategory, setActiveCategory] = useState("All")
     const [blogPosts, setBlogPosts] = useState([])
+    const [mediumPosts, setMediumPosts] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -26,18 +34,31 @@ function BlogGridContent() {
                 query = query.ilike('title', `%${q}%`)
             }
 
-            const { data, error } = await query
+            const [{ data, error }, mediumResponse] = await Promise.all([
+                query,
+                fetch('/api/medium').catch(() => null),
+            ])
             if (!error && data) {
                 setBlogPosts(data)
+            }
+            if (mediumResponse?.ok) {
+                const mediumData = await mediumResponse.json()
+                setMediumPosts(Array.isArray(mediumData) ? mediumData : [])
+            } else {
+                setMediumPosts([])
             }
             setLoading(false)
         }
         fetchPosts()
     }, [q])
 
-    const filteredPosts = activeCategory === "All"
+    const localPosts = activeCategory === "All"
         ? blogPosts
         : blogPosts.filter((post) => post.category === activeCategory)
+    const filteredMediumPosts = activeCategory === "All"
+        ? mediumPosts
+        : []
+    const filteredPosts = [...localPosts, ...filteredMediumPosts]
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -112,28 +133,38 @@ function BlogGridContent() {
                                     <div className="loading-state">Loading posts...</div>
                                 ) : filteredPosts.length > 0 ? (
                                     <div className="row clearfix">
-                                        {filteredPosts.map((post) => (
-                                            <div className="col-lg-6 col-md-6 col-sm-12 news-block" key={post.id}>
+                                        {filteredPosts.map((post) => {
+                                            const isMediumPost = !post.id
+                                            const postSlug = isMediumPost ? getMediumSlug(post.title) : post.slug
+                                            const postHref = isMediumPost
+                                                ? `/blog/medium/${postSlug}`
+                                                : `/blog-details?slug=${encodeURIComponent(postSlug || '')}`
+                                            const postImage = isMediumPost ? post.thumbnail : post.cover_image
+                                            const postDate = isMediumPost ? post.pubDate : post.created_at
+
+                                            return (
+                                            <div className="col-lg-6 col-md-6 col-sm-12 news-block" key={isMediumPost ? post.guid || post.title : post.id}>
                                                 <div className="news-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                                     <div className="inner-box">
                                                         <div className="image-box">
-                                                            <figure className="image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "/assets/images/placeholder.svg"} alt={post.title}/></Link></figure>
-                                                            <figure className="overlay-image"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}><img src={post.cover_image || "/assets/images/placeholder.svg"} alt={post.title}/></Link></figure>
+                                                            <figure className="image"><Link href={postHref}><img src={postImage || "/assets/images/placeholder.svg"} alt={post.title}/></Link></figure>
+                                                            <figure className="overlay-image"><Link href={postHref}><img src={postImage || "/assets/images/placeholder.svg"} alt={post.title}/></Link></figure>
                                                         </div>
                                                         <div className="lower-content">
-                                                            <span className="category">{post.category || "General"}</span>
-                                                            <h3><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}>{post.title}</Link></h3>
-                                                            <p className="bec-post-excerpt">{post.excerpt}</p>
+                                                            <span className="category">{isMediumPost ? "Medium" : post.category || "General"}</span>
+                                                            <h3><Link href={postHref}>{post.title}</Link></h3>
+                                                            <p className="bec-post-excerpt">{post.excerpt || post.description?.replace(/<[^>]*>/g, '')}</p>
                                                             <ul className="post-info">
-                                                                <li>By <Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`}>{post.author || "Admin"}</Link></li>
-                                                                <li><span>{post.created_at ? new Date(post.created_at).toLocaleDateString() : '—'}</span></li>
+                                                                <li>By <Link href={postHref}>{isMediumPost ? "Medium" : post.author || "Admin"}</Link></li>
+                                                                <li><span>{postDate ? new Date(postDate).toLocaleDateString() : '—'}</span></li>
                                                             </ul>
-                                                            <div className="btn-box mt_20"><Link href={`/blog-details?slug=${encodeURIComponent(post.slug || '')}`} className="theme-btn btn-one">Learn More</Link></div>
+                                                            <div className="btn-box mt_20"><Link href={postHref} className="theme-btn btn-one">Read Article</Link></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        ))}
+                                            )
+                                        })}
                                     </div>
                                 ) : (
                                     <div className="bec-blog-empty">
