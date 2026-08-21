@@ -3,7 +3,12 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { supabase } from '@/lib/supabase/client'
+import '@uiw/react-md-editor/markdown-editor.css'
+import '@uiw/react-markdown-preview/markdown.css'
+
+const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
 const generateSlug = (title) => title
   .toLowerCase()
@@ -199,7 +204,14 @@ export default function EditPostPage() {
 
           <div>
             <label style={styles.label}>Content</label>
-            <textarea style={{ ...styles.textarea, minHeight: 220 }} value={post.content || ''} onChange={(e) => handleChange('content', e.target.value)} />
+            <div data-color-mode="dark">
+              <MDEditor
+                value={post.content || ''}
+                onChange={val => handleChange('content', val || '')}
+                height={400}
+                preview="live"
+              />
+            </div>
           </div>
 
           <div>

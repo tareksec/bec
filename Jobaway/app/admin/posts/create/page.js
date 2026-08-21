@@ -2,29 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { supabase } from '@/lib/supabase/client'
+import '@uiw/react-md-editor/markdown-editor.css'
+import '@uiw/react-markdown-preview/markdown.css'
 
-function RichTextEditor({ value, onChange }) {
-  return (
-    <textarea
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder="Write your post content here..."
-      style={{
-        width: '100%',
-        minHeight: 280,
-        padding: '12px 14px',
-        borderRadius: 8,
-        border: '1px solid #334155',
-        background: '#0f172a',
-        color: '#e2e8f0',
-        fontSize: 15,
-        outline: 'none',
-        resize: 'vertical',
-      }}
-    />
-  )
-}
+const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
 const S = {
   page: { minHeight: '100vh', background: '#0f172a', color: '#e2e8f0', fontFamily: 'var(--arimo), var(--noto-bengali), sans-serif', padding: '40px 20px' },
@@ -270,8 +253,13 @@ export default function CreatePostPage() {
           <textarea style={S.textarea} placeholder="Short summary for SEO and preview cards..." value={formData.excerpt} onChange={e => setFormData(p => ({ ...p, excerpt: e.target.value }))} />
 
           <label style={S.label}>Content</label>
-          <div style={S.quillWrapper}>
-            <RichTextEditor value={formData.content} onChange={val => setFormData(p => ({ ...p, content: val }))} />
+          <div data-color-mode="dark" style={{ marginBottom: 24 }}>
+            <MDEditor
+              value={formData.content}
+              onChange={val => setFormData(p => ({ ...p, content: val || '' }))}
+              height={400}
+              preview="live"
+            />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>

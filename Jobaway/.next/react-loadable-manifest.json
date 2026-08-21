@@ -1,4 +1,18 @@
 {
+  "app\\admin\\posts\\[id]\\edit\\page.js -> @uiw/react-md-editor": {
+    "id": 95341,
+    "files": [
+      "static/css/e83a55289503542d.css",
+      "static/chunks/5341.7feb77ec582ffbdf.js"
+    ]
+  },
+  "app\\admin\\posts\\create\\page.js -> @uiw/react-md-editor": {
+    "id": 95341,
+    "files": [
+      "static/css/e83a55289503542d.css",
+      "static/chunks/5341.7feb77ec582ffbdf.js"
+    ]
+  },
   "app\\portfolio-2\\page.js -> @/components/elements/PortfolioFilter2": {
     "id": 64072,
     "files": [
