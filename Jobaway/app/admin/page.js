@@ -1,24 +1,11 @@
-import { createServerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
 import AdminClient from './AdminClient'
 
 export const dynamic = 'force-dynamic'
 
 export default async function AdminPage() {
-  const cookieStore = await cookies()
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    {
-      cookies: {
-        get(name) {
-          return cookieStore.get(name)?.value
-        }
-      }
-    }
-  )
+  const supabase = await createSupabaseServerClient()
 
-  // Fetch counts in parallel
   const [
     { count: totalPosts },
     { count: publishedPosts },

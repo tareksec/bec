@@ -1,24 +1,23 @@
-import { supabaseAdmin } from '@/lib/supabase/server'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
 import HashtagsClient from './HashtagsClient'
 
 export const dynamic = 'force-dynamic'
 
 export default async function HashtagsPage() {
-  // Fetch hashtags with the count of related post_hashtags records
+  const supabaseAdmin = await createSupabaseServerClient()
   const { data: hashtags, error } = await supabaseAdmin
     .from('hashtags')
     .select(`
-      id, 
-      name, 
+      id,
+      name,
       post_hashtags ( count )
     `)
     .order('name')
 
   if (error) {
-    console.error("Error fetching hashtags:", error)
+    console.error('Error fetching hashtags:', error)
   }
 
-  // Format data to flatten the postCount
   const formattedHashtags = (hashtags || []).map(tag => ({
     id: tag.id,
     name: tag.name,
