@@ -24,9 +24,9 @@ export default function About(){
                                         <Image src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="Team discussing corporate growth" width={400} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                     </figure>
                                 </div>
-                                <div className="video-inner" style={{ backgroundImage: "url(assets/images/resource/video-1.jpg)" }}>
+                                <div className="video-inner" style={{ backgroundImage: "url(https://img.youtube.com/vi/T8X5DTqeEf8/maxresdefault.jpg)" }}>
                                     <div className="video-content">
-                                        <VideoPopup />
+                                        <VideoPopup videoId="T8X5DTqeEf8" />
                                         <h6>Watch Video</h6>
                                     </div>
                                 </div>

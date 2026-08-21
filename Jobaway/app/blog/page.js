@@ -8,6 +8,8 @@ import { supabase } from '@/lib/supabase/client'
 
 const blogCategories = ["All", "Career Tips", "Business", "Industry Insights", "Training"]
 
+const stripHtml = (html) => html?.replace(/<[^>]*>/g, '').slice(0, 120) + '...'
+
 const getMediumSlug = (title = '') => title
     .toLowerCase()
     .trim()
@@ -153,7 +155,7 @@ function BlogGridContent() {
                                                         <div className="lower-content">
                                                             <span className="category">{isMediumPost ? "Medium" : post.category || "General"}</span>
                                                             <h3><Link href={postHref}>{post.title}</Link></h3>
-                                                            <p className="bec-post-excerpt">{post.excerpt || post.description?.replace(/<[^>]*>/g, '')}</p>
+                                                            <p className="bec-post-excerpt">{post.excerpt || stripHtml(post.content || post.description)}</p>
                                                             <ul className="post-info">
                                                                 <li>By <Link href={postHref}>{isMediumPost ? "Medium" : post.author || "Admin"}</Link></li>
                                                                 <li><span>{postDate ? new Date(postDate).toLocaleDateString() : '—'}</span></li>

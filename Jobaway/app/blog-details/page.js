@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import Layout from "@/components/layout/Layout"
 import Subscribe from '@/components/sections/home2/Subscribe'
 import { supabase } from '@/lib/supabase/client'
+import './blog-details.css'
 
 function BlogDetailsContent() {
     const searchParams = useSearchParams()
@@ -111,9 +112,10 @@ function BlogDetailsContent() {
                                                 </div>
                                                 <div className="text-box pt_25 mb_50">
                                                     <p className="mb_30">{post.excerpt}</p>
-                                                    <div style={{ whiteSpace: "pre-wrap" }}>
-                                                        {post.content}
-                                                    </div>
+                                                    <div 
+                                                        className="post-content"
+                                                        dangerouslySetInnerHTML={{ __html: post.content }} 
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
