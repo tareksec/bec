@@ -17,7 +17,7 @@ export default function MobileMenu({ isSidebar, handleMobileMenu, handleSidebar 
                                 <li><Link href="/team">Community</Link></li>
                                 <li><Link href="/service-details">Events</Link></li>
                                 <li><Link href="/testimonial">Reviews</Link></li>
-                                <li><Link href="/blog">Resources</Link></li>
+                                <li><Link href="/blog">Blogs</Link></li>
                                 <li><Link href="/contact">Contact Us</Link></li>
                             </ul>
                         </div>

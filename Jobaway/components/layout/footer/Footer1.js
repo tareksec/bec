@@ -47,7 +47,7 @@ export default function Footer1() {
                                     <ul className="links-list clearfix">
                                         <li><Link href="/service-details">Events</Link></li>
                                         <li><Link href="/testimonial">Reviews</Link></li>
-                                        <li><Link href="/blog">Resources</Link></li>
+                                        <li><Link href="/blog">Blogs</Link></li>
                                         <li><Link href="/">Join BEC</Link></li>
                                     </ul>
                                 </div>
