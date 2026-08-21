@@ -4,10 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { supabase } from '@/lib/supabase/client'
-import '@uiw/react-md-editor/markdown-editor.css'
-import '@uiw/react-markdown-preview/markdown.css'
-
-const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
+const RichTextEditor = dynamic(() => import('@/app/admin/components/RichTextEditor'), { ssr: false })
 
 const S = {
   page: { minHeight: '100vh', background: '#0f172a', color: '#e2e8f0', fontFamily: 'var(--arimo), var(--noto-bengali), sans-serif', padding: '40px 20px' },
@@ -21,7 +18,6 @@ const S = {
   btnSecondary: { padding: '12px 24px', borderRadius: 8, border: '1px solid #475569', background: 'transparent', color: '#cbd5e1', fontWeight: 600, fontSize: 16, cursor: 'pointer' },
   tagPill: { background: '#334155', color: '#e2e8f0', padding: '4px 10px', borderRadius: 16, fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6, margin: '0 8px 8px 0' },
   tagRemove: { cursor: 'pointer', color: '#94a3b8', fontSize: 16, lineHeight: 1 },
-  quillWrapper: { marginBottom: 24, background: '#fff', color: '#000', borderRadius: 8, overflow: 'hidden' }
 }
 
 const generateSlug = (title) => title
@@ -253,12 +249,10 @@ export default function CreatePostPage() {
           <textarea style={S.textarea} placeholder="Short summary for SEO and preview cards..." value={formData.excerpt} onChange={e => setFormData(p => ({ ...p, excerpt: e.target.value }))} />
 
           <label style={S.label}>Content</label>
-          <div data-color-mode="dark" style={{ marginBottom: 24 }}>
-            <MDEditor
+          <div style={{ marginBottom: 24 }}>
+            <RichTextEditor
               value={formData.content}
-              onChange={val => setFormData(p => ({ ...p, content: val || '' }))}
-              height={400}
-              preview="live"
+              onChange={val => setFormData(p => ({ ...p, content: val }))}
             />
           </div>
 
