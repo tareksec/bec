@@ -69,11 +69,19 @@ export default function CreatePostPage() {
     async function loadData() {
       if (!supabase) return
 
-      const { data: catData } = await supabase.from('categories').select('*').order('name')
-      if (catData) setCategories(catData)
+      const { data: catData, error: catError } = await supabase.from('categories').select('*').order('name')
+      if (catError) {
+        setError(`Could not load categories: ${catError.message}`)
+      } else {
+        setCategories(catData || [])
+      }
 
-      const { data: hashData } = await supabase.from('hashtags').select('*').order('name')
-      if (hashData) setHashtags(hashData)
+      const { data: hashData, error: hashError } = await supabase.from('hashtags').select('*').order('name')
+      if (hashError) {
+        setError(`Could not load hashtags: ${hashError.message}`)
+      } else {
+        setHashtags(hashData || [])
+      }
     }
     loadData()
   }, [])
@@ -115,7 +123,9 @@ export default function CreatePostPage() {
     const fileExt = file.name.split('.').pop()
     const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`
     
-    const { error: uploadError } = await supabase.storage.from('post-images').upload(fileName, file)
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('post-images')
+      .upload(`${Date.now()}-${file.name}`, file)
     
     if (uploadError) {
       setError(`Image upload failed: ${uploadError.message}`)
@@ -123,7 +133,7 @@ export default function CreatePostPage() {
       return
     }
 
-    const { data: urlData } = supabase.storage.from('post-images').getPublicUrl(fileName)
+    const { data: urlData } = supabase.storage.from('post-images').getPublicUrl(uploadData.path)
     setFormData(prev => ({ ...prev, cover_image: urlData.publicUrl }))
     setUploadingImage(false)
   }
@@ -181,7 +191,12 @@ export default function CreatePostPage() {
         post_id: postId,
         category_id: catId
       }))
-      await supabase.from('post_categories').insert(categoryInserts)
+      const { error: categoryError } = await supabase.from('post_categories').insert(categoryInserts)
+      if (categoryError) {
+        setError(`Post saved, but categories could not be saved: ${categoryError.message}`)
+        setSaving(false)
+        return
+      }
     }
 
     // 4. Handle Hashtags (Ensure they exist first, then link)
@@ -200,13 +215,18 @@ export default function CreatePostPage() {
         }
 
         if (hashtagId) {
-          await supabase.from('post_hashtags').insert([{ post_id: postId, hashtag_id: hashtagId }])
+          const { error: linkError } = await supabase.from('post_hashtags').insert([{ post_id: postId, hashtag_id: hashtagId }])
+          if (linkError) {
+            setError(`Post saved, but hashtag links could not be saved: ${linkError.message}`)
+            setSaving(false)
+            return
+          }
         }
       }
     }
 
     // Success! Redirect to Admin
-    router.push('/admin')
+    router.push('/admin/posts')
   }
 
   return (

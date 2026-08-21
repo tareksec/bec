@@ -152,12 +152,12 @@ export default function PostsClient({ posts, totalCount, categories, page, limit
                       </Link>
                     </td>
                     <td style={S.td}>
-                      {post.post_categories?.map(pc => (
+                      {post.post_categories?.map(pc => pc.categories && (
                         <span key={pc.categories.id} style={S.tagPill}>{pc.categories.name}</span>
                       ))}
                     </td>
                     <td style={S.td}>
-                      {post.post_hashtags?.map(ph => (
+                      {post.post_hashtags?.map(ph => ph.hashtags && (
                         <span key={ph.hashtags.id} style={S.tagPill}>#{ph.hashtags.name}</span>
                       ))}
                     </td>

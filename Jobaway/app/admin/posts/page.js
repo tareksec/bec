@@ -20,11 +20,12 @@ export default async function PostsPage({ searchParams }) {
     .select('id, name')
     .order('name')
 
+  const categoryRelation = categoryId ? 'post_categories!inner' : 'post_categories'
   let query = supabaseAdmin
     .from('posts')
     .select(`
       *,
-      post_categories!inner (
+      ${categoryRelation} (
         categories (id, name)
       ),
       post_hashtags (
