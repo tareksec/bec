@@ -4,7 +4,5 @@
   "/service/page": "app/service/page.js",
   "/team/page": "app/team/page.js",
   "/service-details/page": "app/service-details/page.js",
-  "/testimonial/page": "app/testimonial/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/contact/page": "app/contact/page.js"
+  "/testimonial/page": "app/testimonial/page.js"
 }
