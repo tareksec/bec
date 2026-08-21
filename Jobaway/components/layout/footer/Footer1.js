@@ -80,7 +80,7 @@ export default function Footer1() {
                 <div className="auto-container">
                     <div className="bottom-inner">
                         <div className="copyright">
-                            <p>Copyright &copy; {new Date().getFullYear()} <Link href="/">Bangladesh Executive Chamber</Link>. All Rights Reserved.</p>
+                            <p>Copyright &copy; {new Date().getFullYear()} <Link href="/">Bangladesh Executive Chamber</Link>. All Rights Reserved. | Developed by <a href="https://artx.techvrs.com/" target="_blank" rel="noopener noreferrer">Artx TechVRS</a> &amp; <a href="https://www.linkedin.com/in/mdtarek404/" target="_blank" rel="noopener noreferrer">Md Tarek</a></p>
                             <p className="bec-microcopy">Made with ❤️ in BD</p>
                             <p className="bec-legal-links">
                                 <Link href="/privacy-policy">Privacy Policy</Link>
