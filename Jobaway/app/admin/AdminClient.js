@@ -1,8 +1,7 @@
 'use client'
 
-
 import { useState, useEffect, useCallback } from 'react'
-import { supabase } from '@/lib/supabase/client'
+import { supabase, hasSupabaseConfig } from '@/lib/supabase/client'
 
 /* ──────────────────────────────────────────────
    CSS-in-JS styles (kept in one object so we
@@ -690,7 +689,7 @@ export default function AdminClient({ initialStats }) {
   }, [])
 
   // ── If supabase client is not configured ──
-  if (!supabase) {
+  if (!hasSupabaseConfig || !supabase) {
     return (
       <div style={S.page}>
         <div style={S.loginWrap}>

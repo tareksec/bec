@@ -3,11 +3,28 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
-import dynamic from 'next/dynamic'
-import 'react-quill/dist/quill.snow.css'
 
-// Dynamically import ReactQuill to prevent SSR hydration errors
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
+function RichTextEditor({ value, onChange }) {
+  return (
+    <textarea
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Write your post content here..."
+      style={{
+        width: '100%',
+        minHeight: 280,
+        padding: '12px 14px',
+        borderRadius: 8,
+        border: '1px solid #334155',
+        background: '#0f172a',
+        color: '#e2e8f0',
+        fontSize: 15,
+        outline: 'none',
+        resize: 'vertical',
+      }}
+    />
+  )
+}
 
 const S = {
   page: { minHeight: '100vh', background: '#0f172a', color: '#e2e8f0', fontFamily: 'var(--arimo), var(--noto-bengali), sans-serif', padding: '40px 20px' },
@@ -50,9 +67,11 @@ export default function CreatePostPage() {
   // Fetch initial data (categories and hashtags)
   useEffect(() => {
     async function loadData() {
+      if (!supabase) return
+
       const { data: catData } = await supabase.from('categories').select('*').order('name')
       if (catData) setCategories(catData)
-        
+
       const { data: hashData } = await supabase.from('hashtags').select('*').order('name')
       if (hashData) setHashtags(hashData)
     }
@@ -112,6 +131,11 @@ export default function CreatePostPage() {
   // Submit Form
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!supabase) {
+      setError('Supabase client is not available in this browser session.')
+      return
+    }
+
     if (!formData.title || !formData.slug) {
       setError("Title and Slug are required.")
       return
@@ -213,7 +237,7 @@ export default function CreatePostPage() {
 
           <label style={S.label}>Content</label>
           <div style={S.quillWrapper}>
-            <ReactQuill theme="snow" value={formData.content} onChange={val => setFormData(p => ({ ...p, content: val }))} style={{ minHeight: 300 }} />
+            <RichTextEditor value={formData.content} onChange={val => setFormData(p => ({ ...p, content: val }))} />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>

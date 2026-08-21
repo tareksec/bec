@@ -147,7 +147,7 @@ export default function PostsClient({ posts, totalCount, categories, page, limit
                       />
                     </td>
                     <td style={S.td}>
-                      <Link href={`/admin/posts/edit/${post.id}`} style={{ color: '#a78bfa', textDecoration: 'none', fontWeight: 600 }}>
+                      <Link href={`/admin/posts/${post.id}/edit`} style={{ color: '#a78bfa', textDecoration: 'none', fontWeight: 600 }}>
                         {post.title}
                       </Link>
                     </td>
@@ -169,7 +169,7 @@ export default function PostsClient({ posts, totalCount, categories, page, limit
                     </td>
                     <td style={S.td}>
                       <Link href={`/blog/${post.slug}`} target="_blank" style={S.actionBtn('#475569')}>View</Link>
-                      <Link href={`/admin/posts/edit/${post.id}`} style={S.actionBtn('#6366f1')}>Edit</Link>
+                      <Link href={`/admin/posts/${post.id}/edit`} style={S.actionBtn('#6366f1')}>Edit</Link>
                       <button style={S.actionBtn('#ef4444')} onClick={() => setDeleteId(post.id)}>Delete</button>
                     </td>
                   </tr>
