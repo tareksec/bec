@@ -71,12 +71,6 @@ function BlogDetailsContent() {
   // 1. Fetch Post & Related Posts
   useEffect(() => {
     async function loadPostData() {
-      if (!slug && !id) {
-        setLoading(false)
-        setError('No post identifier provided.')
-        return
-      }
-
       setLoading(true)
       setError(null)
 
@@ -86,42 +80,80 @@ function BlogDetailsContent() {
         return
       }
 
-      let query = supabase
-        .from('posts')
-        .select(`
-          id,
-          title,
-          slug,
-          excerpt,
-          content,
-          cover_image,
-          status,
-          created_at,
-          author,
-          post_categories (
-            category_id,
-            categories (id, name, slug)
-          ),
-          post_hashtags (
-            hashtag_id,
-            hashtags (id, name, slug)
-          )
-        `)
+      const selectQuery = `
+        id,
+        title,
+        slug,
+        excerpt,
+        content,
+        cover_image,
+        status,
+        created_at,
+        author,
+        post_categories (
+          category_id,
+          categories (id, name, slug)
+        ),
+        post_hashtags (
+          hashtag_id,
+          hashtags (id, name, slug)
+        )
+      `
 
-      query = slug ? query.eq('slug', slug) : query.eq('id', id)
-      let { data, error: fetchErr } = await query.maybeSingle()
+      let data = null
+      let fetchErr = null
 
-      // Fallback: try ID if slug failed
-      if (!data && slug && id) {
-        const idQuery = await supabase.from('posts').select('*').eq('id', id).maybeSingle()
-        if (idQuery.data) {
-          data = idQuery.data
-          fetchErr = null
+      if (slug || id) {
+        const decodedSlug = slug ? decodeURIComponent(slug).trim() : null
+
+        if (decodedSlug) {
+          // 1. Try exact slug match
+          let res = await supabase.from('posts').select(selectQuery).eq('slug', decodedSlug).maybeSingle()
+          data = res.data
+
+          // 2. Try case-insensitive slug match
+          if (!data) {
+            res = await supabase.from('posts').select(selectQuery).ilike('slug', decodedSlug).maybeSingle()
+            data = res.data
+          }
         }
+
+        // 3. Try ID match if provided or if slug looked like an ID / uuid
+        if (!data && id) {
+          let res = await supabase.from('posts').select(selectQuery).eq('id', id).maybeSingle()
+          data = res.data
+        }
+      } else {
+        // 4. No slug/id provided (e.g. direct /blog-details visit): load latest published article
+        const res = await supabase
+          .from('posts')
+          .select(selectQuery)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+        data = res.data
       }
 
-      if (fetchErr || !data) {
-        setError('Article could not be found or has been moved.')
+      if (!data) {
+        // Fallback: If specific slug was not found, fetch latest published article as fallback suggestion
+        const { data: latestPosts } = await supabase
+          .from('posts')
+          .select(`
+            id,
+            title,
+            slug,
+            excerpt,
+            cover_image,
+            created_at,
+            post_categories (
+              categories (id, name, slug)
+            )
+          `)
+          .order('created_at', { ascending: false })
+          .limit(3)
+
+        setRelatedPosts(latestPosts || [])
+        setError('The requested article could not be found or has been moved.')
         setPost(null)
       } else {
         setPost(data)
