@@ -145,14 +145,22 @@ export default function PostsClient({ posts = [], totalCount = 0, categories = [
                   <tr key={post.id}>
                     <td>
                       <div style={{ width: 56, height: 38, position: 'relative', borderRadius: 6, overflow: 'hidden', border: '1px solid var(--border)', background: '#f5f0eb' }}>
-                        <Image
-                          src={post.cover_image || '/assets/images/resource/news-1.jpg'}
-                          alt={post.title || 'Post cover'}
-                          width={56}
-                          height={38}
-                          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                          unoptimized
-                        />
+                        {(() => {
+                          const rawCover = post.cover_image?.trim()
+                          const safeCover = (rawCover && (rawCover.startsWith('http') || rawCover.startsWith('/')))
+                            ? rawCover
+                            : '/assets/images/resource/news-1.jpg'
+                          return (
+                            <Image
+                              src={safeCover}
+                              alt={post.title || 'Post cover'}
+                              width={56}
+                              height={38}
+                              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                              unoptimized
+                            />
+                          )
+                        })()}
                       </div>
                     </td>
                     <td>

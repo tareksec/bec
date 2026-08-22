@@ -106,18 +106,19 @@ export default function CreatePostPage() {
     setUploadingImage(true)
     setError('')
 
-    const fileExt = file.name.split('.').pop()
-    const filePath = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`
+    const filePath = `covers/${Date.now()}-${file.name}`
 
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('post-images')
       .upload(filePath, file, {
         cacheControl: '3600',
-        upsert: false,
+        upsert: true,
       })
 
     if (uploadError) {
+      console.error('Upload error:', uploadError.message)
       setError(`Image upload failed: ${uploadError.message}`)
+      alert('Image upload failed: ' + uploadError.message)
       setUploadingImage(false)
       return
     }
@@ -128,8 +129,11 @@ export default function CreatePostPage() {
       return
     }
 
-    const { data: urlData } = supabase.storage.from('post-images').getPublicUrl(uploadData.path)
-    setFormData((prev) => ({ ...prev, cover_image: urlData.publicUrl }))
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from('post-images').getPublicUrl(uploadData.path)
+
+    setFormData((prev) => ({ ...prev, cover_image: publicUrl }))
     setUploadingImage(false)
   }
 
