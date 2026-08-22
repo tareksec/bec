@@ -106,25 +106,15 @@ export default function CreatePostPage() {
     setUploadingImage(true)
     setError('')
 
-    const filePath = `covers/${Date.now()}-${file.name}`
-
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('post-images')
-      .upload(filePath, file, {
+      .upload(`covers/${Date.now()}-${file.name}`, file, {
         cacheControl: '3600',
         upsert: true,
       })
 
     if (uploadError) {
-      console.error('Upload error:', uploadError.message)
-      setError(`Image upload failed: ${uploadError.message}`)
-      alert('Image upload failed: ' + uploadError.message)
-      setUploadingImage(false)
-      return
-    }
-
-    if (!uploadData?.path) {
-      setError('Image upload failed: Supabase did not return a path.')
+      alert('Upload failed: ' + uploadError.message)
       setUploadingImage(false)
       return
     }
