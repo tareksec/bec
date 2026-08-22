@@ -105,12 +105,12 @@ function BlogGridContent() {
             cover_image,
             status,
             created_at,
-            author,
+            author_id,
             post_categories (
               categories (id, name, slug)
             ),
             post_hashtags (
-              hashtags (id, name, slug)
+              hashtags (id, name)
             )
           `)
           .order('created_at', { ascending: false })
@@ -137,11 +137,17 @@ function BlogGridContent() {
       }
 
       // Handle Supabase posts
-      if (postsRes?.data) {
-        // Filter out drafts if status is set, otherwise show valid items
-        const visiblePosts = postsRes.data.filter((p) => p.status !== 'archived' && p.status !== 'draft')
+      if (postsRes?.data && Array.isArray(postsRes.data)) {
+        // Show published posts or all non-archived posts
+        const publishedPosts = postsRes.data.filter((p) => p.status === 'published')
+        const visiblePosts = publishedPosts.length > 0
+          ? publishedPosts
+          : postsRes.data.filter((p) => p.status !== 'archived')
         setBlogPosts(visiblePosts.length > 0 ? visiblePosts : postsRes.data)
       } else {
+        if (postsRes?.error) {
+          console.error('Supabase posts fetch error:', postsRes.error)
+        }
         setBlogPosts([])
       }
 
@@ -166,20 +172,34 @@ function BlogGridContent() {
       counts[c.name] = 0
     })
     blogPosts.forEach((post) => {
-      const cat = getPostCategory(post)
-      counts[cat] = (counts[cat] || 0) + 1
+      if (post.post_categories && post.post_categories.length > 0) {
+        post.post_categories.forEach((pc) => {
+          if (pc.categories?.name) {
+            counts[pc.categories.name] = (counts[pc.categories.name] || 0) + 1
+          }
+        })
+      } else {
+        const cat = getPostCategory(post)
+        counts[cat] = (counts[cat] || 0) + 1
+      }
     })
     return counts
   }, [categories, blogPosts])
 
   // Filter posts based on active category
   const filteredPosts = useMemo(() => {
-    if (activeCategory === 'All') {
+    if (!activeCategory || activeCategory.toLowerCase() === 'all') {
       return blogPosts
     }
     return blogPosts.filter((post) => {
       const cat = getPostCategory(post)
-      return cat.toLowerCase() === activeCategory.toLowerCase()
+      if (cat.toLowerCase() === activeCategory.toLowerCase()) return true
+      if (post.post_categories && post.post_categories.length > 0) {
+        return post.post_categories.some(
+          (pc) => pc.categories?.name?.toLowerCase() === activeCategory.toLowerCase()
+        )
+      }
+      return false
     })
   }, [blogPosts, activeCategory])
 
@@ -292,22 +312,30 @@ function BlogGridContent() {
                   <div className={styles.emptyIcon}>
                     <i className="icon-38"></i>
                   </div>
-                  <h3>No Articles Found</h3>
+                  <h3>{blogPosts.length === 0 ? 'No Published Articles Yet' : 'No Articles Found'}</h3>
                   <p>
                     {q
                       ? `We couldn't find any articles matching "${q}". Try another keyword or browse all topics.`
+                      : blogPosts.length === 0
+                      ? 'Articles published from the admin dashboard will appear here.'
                       : `There are currently no articles in the "${activeCategory}" category.`}
                   </p>
-                  <button
-                    type="button"
-                    className={styles.resetBtn}
-                    onClick={() => {
-                      setActiveCategory('All')
-                      if (q) router.push('/blog')
-                    }}
-                  >
-                    View All Articles
-                  </button>
+                  {blogPosts.length > 0 ? (
+                    <button
+                      type="button"
+                      className={styles.resetBtn}
+                      onClick={() => {
+                        setActiveCategory('All')
+                        if (q) router.push('/blog')
+                      }}
+                    >
+                      View All Articles
+                    </button>
+                  ) : (
+                    <Link href="/admin/posts/create" className={styles.resetBtn}>
+                      Create an Article
+                    </Link>
+                  )}
                 </div>
               ) : (
                 <>

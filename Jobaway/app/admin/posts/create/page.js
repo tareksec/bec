@@ -29,7 +29,7 @@ export default function CreatePostPage() {
     excerpt: '',
     content: '',
     cover_image: '',
-    status: 'draft',
+    status: 'published',
   })
 
   const [categories, setCategories] = useState([])

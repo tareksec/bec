@@ -89,14 +89,14 @@ function BlogDetailsContent() {
         cover_image,
         status,
         created_at,
-        author,
+        author_id,
         post_categories (
           category_id,
           categories (id, name, slug)
         ),
         post_hashtags (
           hashtag_id,
-          hashtags (id, name, slug)
+          hashtags (id, name)
         )
       `
 
