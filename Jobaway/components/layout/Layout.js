@@ -70,16 +70,11 @@ export default function Layout({ headerStyle, footerStyle, breadcrumbTitle, chil
 
                 {children}
 
-                {!footerStyle && < Footer1 />}
-                {footerStyle == 1 ? < Footer1 /> : null}
-                {!footerStyle && < Footer2 />}
-                {footerStyle == 2 ? < Footer2 /> : null}
-                {!footerStyle && < Footer3 />}
-                {footerStyle == 3 ? < Footer3 /> : null}
-                {!footerStyle && < Footer4 />}
-                {footerStyle == 4 ? < Footer4 /> : null}
-                {!footerStyle && < Footer5 />}
-                {footerStyle == 5 ? < Footer5 /> : null}
+                {(!footerStyle || footerStyle == 1) ? <Footer1 /> : null}
+                {footerStyle == 2 ? <Footer2 /> : null}
+                {footerStyle == 3 ? <Footer3 /> : null}
+                {footerStyle == 4 ? <Footer4 /> : null}
+                {footerStyle == 5 ? <Footer5 /> : null}
             </div>
             <BackToTop scroll={scroll} />
         </>
