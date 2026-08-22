@@ -4,12 +4,32 @@ import { getMediumPost } from '@/lib/medium'
 import styles from './page.module.scss'
 
 export async function generateMetadata({ params }) {
-  const post = await getMediumPost((await params).slug)
-  const description = post?.description?.replace(/<[^>]*>/g, '').slice(0, 160)
+  const resolvedParams = await params
+  const post = await getMediumPost(resolvedParams?.slug)
+
+  const description = post?.description?.replace(/<[^>]*>/g, '').slice(0, 160) || 'Bangladesh Executive Chamber (BEC) publication.'
 
   return {
-    title: post?.title || 'Blog Post',
-    ...(description ? { description } : {}),
+    title: post ? `${post.title} — BEC` : 'Article — BEC',
+    description,
+    openGraph: {
+      title: post ? `${post.title} — BEC` : 'Article — BEC',
+      description,
+      images: [
+        {
+          url: post?.thumbnail || '/assets/images/og-default.jpg',
+          width: 1200,
+          height: 630,
+        }
+      ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post ? `${post.title} — BEC` : 'Article — BEC',
+      description,
+      images: [post?.thumbnail || '/assets/images/og-default.jpg'],
+    },
   }
 }
 

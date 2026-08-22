@@ -11,50 +11,48 @@ import "swiper/css/free-mode";
 import { arimo, noto_bengali } from "@/lib/font";
 
 export const metadata = {
-    title: {
-      default: "Bangladesh Executive Chamber (BEC) | Empowering Professionals",
-      template: "%s | BEC"
-    },
-    description: "BEC is Bangladesh's premier professional ecosystem for career development, business consulting, talent acquisition, and professional networking.",
-    keywords: ["BEC", "Bangladesh Executive Chamber", "Career Development Bangladesh", "Business Consulting", "Talent Acquisition", "Professional Networking", "Executive Search", "Dhaka"],
-    authors: [{ name: "BEC" }],
-    creator: "Bangladesh Executive Chamber",
-    openGraph: {
-      type: "website",
-      locale: "en_US",
-      url: "https://www.bec.com.bd",
-      title: "Bangladesh Executive Chamber (BEC)",
-      description: "Bangladesh's premier professional ecosystem for career development, business consulting, talent acquisition, and professional networking.",
-      siteName: "Bangladesh Executive Chamber",
-      images: [
-        {
-          url: "https://www.bec.com.bd/assets/images/logo.png",
-          width: 800,
-          height: 600,
-          alt: "BEC Logo",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Bangladesh Executive Chamber (BEC)",
-      description: "Bangladesh's premier professional ecosystem for career development.",
-      images: ["https://www.bec.com.bd/assets/images/logo.png"],
-    },
-    robots: {
+  metadataBase: new URL('https://www.thebec.site'),
+  title: 'BEC — Bangladesh Executive Chamber',
+  description: 'Bangladesh Executive Chamber (BEC) is a professional ecosystem that empowers careers, strengthens brands, and drives corporate growth.',
+  keywords: ["BEC", "Bangladesh Executive Chamber", "Career Development Bangladesh", "Business Consulting", "Talent Acquisition", "Professional Networking", "Executive Search", "Dhaka"],
+  authors: [{ name: "BEC" }],
+  creator: "Bangladesh Executive Chamber",
+  openGraph: {
+    title: 'BEC — Bangladesh Executive Chamber',
+    description: 'Empowering careers, strengthening brands, and driving corporate growth through consulting, talent solutions, training, and meaningful connections.',
+    url: 'https://www.thebec.site',
+    siteName: 'Bangladesh Executive Chamber',
+    images: [
+      {
+        url: '/assets/images/og-default.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Bangladesh Executive Chamber',
+      }
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BEC — Bangladesh Executive Chamber',
+    description: 'Empowering careers, strengthening brands, and driving corporate growth.',
+    images: ['/assets/images/og-default.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
       index: true,
       follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
-    alternates: {
-      canonical: "https://www.bec.com.bd",
-    },
+  },
+  alternates: {
+    canonical: "https://www.thebec.site",
+  },
 };
 
 export default function RootLayout({ children }) {

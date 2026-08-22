@@ -1,32 +1,26 @@
 import { Suspense } from 'react'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
-import BlogDetailsClient from './BlogDetailsClient'
+import BlogDetailsClient from '@/app/blog-details/BlogDetailsClient'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ searchParams }) {
-  const resolvedParams = await searchParams
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params
   const slug = resolvedParams?.slug ? decodeURIComponent(resolvedParams.slug).trim() : null
-  const id = resolvedParams?.id
 
-  if (!slug && !id) {
+  if (!slug) {
     return {
-      title: 'Articles & Insights — BEC',
-      description: 'Explore expert analysis and insights from the Bangladesh Executive Chamber.',
+      title: 'Article — BEC',
     }
   }
 
   try {
     const supabase = await createSupabaseServerClient()
-    let query = supabase.from('posts').select('title, excerpt, cover_image, slug, created_at')
-    
-    if (slug) {
-      query = query.eq('slug', slug)
-    } else if (id) {
-      query = query.eq('id', id)
-    }
-
-    const { data: post } = await query.maybeSingle()
+    const { data: post } = await supabase
+      .from('posts')
+      .select('title, excerpt, cover_image, slug, created_at')
+      .eq('slug', slug)
+      .maybeSingle()
 
     if (!post) {
       return {
@@ -37,7 +31,7 @@ export async function generateMetadata({ searchParams }) {
     const postTitle = post.title || 'Article'
     const postDesc = post.excerpt || post.title || 'Bangladesh Executive Chamber Article'
     const postCover = post.cover_image || '/assets/images/og-default.jpg'
-    const postUrl = `https://www.thebec.site/blog-details?slug=${encodeURIComponent(post.slug || '')}`
+    const postUrl = `https://www.thebec.site/blog/${encodeURIComponent(post.slug || '')}`
 
     return {
       title: `${postTitle} — BEC`,
@@ -72,11 +66,14 @@ export async function generateMetadata({ searchParams }) {
   }
 }
 
-export default function Blog_Details() {
+export default async function DynamicBlogPage({ params }) {
+  const resolvedParams = await params
+  const slug = resolvedParams?.slug ? decodeURIComponent(resolvedParams.slug).trim() : ''
+
   return (
     <div className="boxed_wrapper">
       <Suspense fallback={<div style={{ padding: '80px 20px', textAlign: 'center' }}>Loading BEC Article...</div>}>
-        <BlogDetailsClient />
+        <BlogDetailsClient initialSlug={slug} />
       </Suspense>
     </div>
   )
