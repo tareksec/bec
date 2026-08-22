@@ -7,13 +7,13 @@ export default async function PostsPage({ searchParams }) {
   const resolvedParams = await searchParams
   const supabaseAdmin = await createSupabaseServerClient()
 
-  const page = parseInt(resolvedParams.page || '1', 10)
-  const limit = 10
+  const page = Math.max(parseInt(resolvedParams?.page || '1', 10), 1)
+  const limit = 20
   const offset = (page - 1) * limit
 
-  const search = resolvedParams.search || ''
-  const status = resolvedParams.status || ''
-  const categoryId = resolvedParams.category || ''
+  const search = resolvedParams?.search || ''
+  const status = resolvedParams?.status || ''
+  const categoryId = resolvedParams?.category || ''
 
   const { data: categories } = await supabaseAdmin
     .from('categories')
@@ -24,7 +24,12 @@ export default async function PostsPage({ searchParams }) {
   let query = supabaseAdmin
     .from('posts')
     .select(`
-      *,
+      id,
+      title,
+      slug,
+      cover_image,
+      status,
+      created_at,
       ${categoryRelation} (
         categories (id, name)
       ),

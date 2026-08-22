@@ -9,16 +9,20 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 
 export async function createCategory(formData) {
   const supabaseAdmin = await createSupabaseServerClient()
-  const name = formData.get('name')
-  const slug = formData.get('slug')
+  const name = formData.get('name')?.toString().trim()
+  const slug = formData.get('slug')?.toString().trim()
 
   if (!name || !slug) return { error: 'Name and slug are required' }
 
   const { error } = await supabaseAdmin
     .from('categories')
     .insert([{ name, slug }])
+    .select('id')
 
-  if (error) return { error: error.message }
+  if (error) {
+    if (error.code === '23505') return { error: 'A category with this name or slug already exists.' }
+    return { error: error.message }
+  }
 
   revalidatePath('/admin/categories')
   return { success: true }
@@ -26,9 +30,9 @@ export async function createCategory(formData) {
 
 export async function updateCategory(formData) {
   const supabaseAdmin = await createSupabaseServerClient()
-  const id = formData.get('id')
-  const name = formData.get('name')
-  const slug = formData.get('slug')
+  const id = formData.get('id')?.toString().trim()
+  const name = formData.get('name')?.toString().trim()
+  const slug = formData.get('slug')?.toString().trim()
 
   if (!id || !name || !slug) return { error: 'ID, name, and slug are required' }
 
@@ -37,7 +41,10 @@ export async function updateCategory(formData) {
     .update({ name, slug })
     .eq('id', id)
 
-  if (error) return { error: error.message }
+  if (error) {
+    if (error.code === '23505') return { error: 'A category with this name or slug already exists.' }
+    return { error: error.message }
+  }
 
   revalidatePath('/admin/categories')
   return { success: true }
@@ -75,7 +82,7 @@ export async function deleteCategory(id) {
 
 export async function createHashtag(formData) {
   const supabaseAdmin = await createSupabaseServerClient()
-  const name = formData.get('name')
+  const name = formData.get('name')?.toString().trim()
 
   if (!name) return { error: 'Hashtag name is required' }
   const cleanName = name.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
@@ -84,6 +91,7 @@ export async function createHashtag(formData) {
   const { error } = await supabaseAdmin
     .from('hashtags')
     .insert([{ name: cleanName }])
+    .select('id')
 
   if (error) {
     if (error.code === '23505') return { error: 'Hashtag already exists' }
@@ -97,6 +105,12 @@ export async function createHashtag(formData) {
 export async function deleteHashtag(id) {
   const supabaseAdmin = await createSupabaseServerClient()
   if (!id) return { error: 'ID is required' }
+
+  // Clean up any relational links in post_hashtags first to prevent foreign key errors
+  await supabaseAdmin
+    .from('post_hashtags')
+    .delete()
+    .eq('hashtag_id', id)
 
   const { error } = await supabaseAdmin
     .from('hashtags')
